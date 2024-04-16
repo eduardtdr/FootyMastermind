@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "146291508962",
+    "project_id": "footymastermindapp",
+    "storage_bucket": "footymastermindapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146291508962:android:55aa40002d932e363d40bb",
+        "android_client_info": {
+          "package_name": "com.example.footymastermind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "146291508962-fjanq616jj0aqif2op4eo9s9nkakt8o6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.footymastermind",
+            "certificate_hash": "fb26a640d0fc6584e6337ebe32d4505f0793672f"
+          }
+        },
+        {
+          "client_id": "146291508962-snonvkqhsk5sr0k3e1f9fni57o48m54s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpIPh1RugoWBGRrKCnScZTUz2pon0GSTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "146291508962-2o80bk3gqaphen7r4e6tpqmsue37l1g7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

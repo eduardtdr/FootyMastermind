@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/baseline_home_24"
+        android:title="@string/home" />
+
+    <item android:title="@string/multiplayer_games">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_guess"
+                    android:icon="@drawable/baseline_psychology_alt_24"
+                    android:title="@string/guess_who" />
+
+                <item
+                    android:id="@+id/nav_tic_tac_toe"
+                    android:icon="@drawable/baseline_sports_soccer_24"
+                    android:title="@string/tic_tac_toe" />
+            </group>
+        </menu>
+    </item>
+    <item android:title="@string/single_player_games">
+        <menu>
+
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_trivia"
+                    android:icon="@drawable/baseline_timer_24"
+                    android:title="@string/trivia" />
+
+                <item
+                    android:id="@+id/nav_tenaball"
+                    android:icon="@drawable/sharp_keyboard_capslock_24"
+                    android:title="@string/tenaball" />
+
+                <item
+                    android:id="@+id/nav_dream_team"
+                    android:icon="@drawable/baseline_local_fire_department_24"
+                    android:title="@string/dream_team" />
+            </group>
+        </menu>
+    </item>
+
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/baseline_logout_24"
+                android:title="@string/logout" />
+        </menu>
+    </item>
+
+</menu>

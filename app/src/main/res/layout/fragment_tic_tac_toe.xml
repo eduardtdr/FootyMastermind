@@ -1,0 +1,60 @@
+<!-- fragment_tic_tac_toe.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/gameImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/baseline_sports_soccer_24"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tic_tac_toe"
+        android:textStyle="bold"
+        android:textSize="28sp"
+        android:layout_margin="8dp"
+        android:padding="8dp"/>
+
+    <Button
+        android:id="@+id/playButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Game Online"
+        android:enabled="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OR"
+        android:padding="8sp"
+        android:layout_marginTop="8sp"
+        android:textStyle="bold"
+        android:textSize="15sp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/game_id_input"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:inputType="number"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:height="48dp"
+        android:hint="Enter game id"/>
+
+    <Button
+        android:id="@+id/joinButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Join Game Online"
+        android:enabled="true" />
+
+
+</LinearLayout>

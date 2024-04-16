@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">FootyMastermind</string>
+    <string name="account">Don\'t you have an account yet? <font color="#5b39c6"><b><u><i>Sign Up</i></u></b></font></string>
+    <string name="forgot_password"><u>I forgot my password</u></string>
+    <string name="main_name">MainActivity</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+    <string name="guess_who">Guess Who</string>
+    <string name="guess_who_description">Guess Who</string>
+    <string name="trivia">Trivia</string>
+    <string name="dream_team">Dream Team</string>
+    <string name="dream_team_description">Dream Team</string>
+    <string name="football_trivia">Football Trivia</string>
+    <string name="football_trivia_description">Are you ready to put your football knowledge to the test?
+    Try to answer correctly to as many questions as possible within the time limit.
+    Every right answer will get you bonus time as well as points, so the more you know, the longer you will stay in the game.
+    However, wrong answers will cause time drains.
+
+    Check out where you sit in the leaderboard at the end! To start the game, select it from the left sliding menu.
+</string>
+    <string name="tic_tac_toe">Tic Tac Toe</string>
+    <string name="tic_tac_toe_description">Tic Tac Toe</string>
+    <string name="logout">Logout</string>
+    <string name="home">Home</string>
+    <string name="tenaball">Tenaball</string>
+    <string name="tenaball_description">Tenaball</string>
+    <string name="multiplayer_games">Multiplayer Games</string>
+    <string name="single_player_games">Single Player Games</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_result">ResultActivity</string>
+    <string name="game_not_started">Game not started</string>
+</resources>
