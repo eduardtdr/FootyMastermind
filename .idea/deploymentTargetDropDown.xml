@@ -8,17 +8,17 @@
       <entry key="app">
         <State>
           <multipleDevicesSelectedInDropDown value="true" />
-          <targetsSelectedWithDialog>
+          <runningDeviceTargetsSelectedWithDialog>
             <Target>
-              <type value="QUICK_BOOT_TARGET" />
+              <type value="RUNNING_DEVICE_TARGET" />
               <deviceKey>
                 <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\eduar\.android\avd\Pixel_5_API_31.avd" />
+                  <type value="SERIAL_NUMBER" />
+                  <value value="ZY32FQ3QCS" />
                 </Key>
               </deviceKey>
             </Target>
-          </targetsSelectedWithDialog>
+          </runningDeviceTargetsSelectedWithDialog>
         </State>
       </entry>
     </value>

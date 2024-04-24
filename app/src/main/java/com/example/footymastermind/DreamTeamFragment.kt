@@ -1,10 +1,16 @@
 package com.example.footymastermind
 
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.Button
+import android.widget.LinearLayout
+import com.example.footymastermind.databinding.FragmentDreamTeamBinding
+import com.example.footymastermind.databinding.FragmentTicTacToeBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +27,8 @@ class DreamTeamFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var dreamTeamBinding: FragmentDreamTeamBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,10 +42,77 @@ class DreamTeamFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dream_team, container, false)
+        dreamTeamBinding = FragmentDreamTeamBinding.inflate(inflater, container, false)
+        return dreamTeamBinding.root
     }
 
-    companion object {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        dreamTeamBinding.configSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                displayButtonsBasedOnSelection()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do nothing
+            }
+        }
+    }
+
+    private fun displayButtonsBasedOnSelection() {
+        // Get the selected value from the spinner
+        val selectedValue = dreamTeamBinding.configSpinner.selectedItem as String
+
+        // Convert the selected value to a list of integers
+        val buttonCounts = selectedValue.split("-").map { it.toInt() }
+
+        // Clear the existing buttons from the container layout
+        dreamTeamBinding.buttonsContainer.removeAllViews()
+
+        // Calculate total number of buttons
+        val totalButtons = buttonCounts.sum()
+
+        // Calculate number of buttons in each row
+        val rows = buttonCounts.size
+
+        // Calculate the number of buttons in the last row
+        val buttonsInLastRow = totalButtons % rows
+
+        // Calculate the size of each button (assuming equal width and height)
+        val scale: Float = resources.displayMetrics.density
+        val buttonSizeInPixels = (48 * scale + 0.5f).toInt()
+
+        val buttonSize = buttonSizeInPixels
+
+        val totalWidth = buttonSize * buttonsInLastRow
+
+        // Add buttons rows dynamically
+        var startIndex = 0
+        for (count in buttonCounts) {
+            val endIndex = startIndex + count
+            val rowLayout = LinearLayout(requireContext())
+            rowLayout.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            rowLayout.orientation = LinearLayout.HORIZONTAL
+
+            for (i in startIndex until endIndex) {
+                val button = Button(requireContext())
+                button.text = "Button ${i + 1}"
+                button.layoutParams = LinearLayout.LayoutParams(buttonSize, buttonSize)
+                rowLayout.addView(button)
+            }
+
+            dreamTeamBinding.buttonsContainer.addView(rowLayout)
+
+            startIndex = endIndex
+        }
+
+    }
+
+        companion object {
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.

@@ -27,7 +27,8 @@
             android:theme="@style/AppThemeSplash" />
         <activity
             android:name=".DreamTeamFragment"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppThemeSplash" />
         <activity
             android:name=".GameModel"
             android:exported="false" />
