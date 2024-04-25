@@ -1,5 +1,6 @@
 package com.example.footymastermind
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.Gravity
 import androidx.fragment.app.Fragment
@@ -8,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Button
+import android.widget.EditText
 import android.widget.LinearLayout
+import androidx.compose.ui.graphics.Color
 import com.example.footymastermind.databinding.FragmentDreamTeamBinding
 import com.example.footymastermind.databinding.FragmentTicTacToeBinding
 
@@ -61,35 +64,22 @@ class DreamTeamFragment : Fragment() {
     }
 
     private fun displayButtonsBasedOnSelection() {
-        // Get the selected value from the spinner
         val selectedValue = dreamTeamBinding.configSpinner.selectedItem as String
+        val formation = "1-$selectedValue"
+        val buttonCounts = formation.split("-").map { it.toInt() }
 
-        // Convert the selected value to a list of integers
-        val buttonCounts = selectedValue.split("-").map { it.toInt() }
-
-        // Clear the existing buttons from the container layout
         dreamTeamBinding.buttonsContainer.removeAllViews()
 
-        // Calculate total number of buttons
         val totalButtons = buttonCounts.sum()
+        val buttonSize = convertDpToPx(80f)
+        val marginBetweenButtons = convertDpToPx(10f)
+        val marginBetweenRows = convertDpToPx(100f)
 
-        // Calculate number of buttons in each row
-        val rows = buttonCounts.size
 
-        // Calculate the number of buttons in the last row
-        val buttonsInLastRow = totalButtons % rows
-
-        // Calculate the size of each button (assuming equal width and height)
-        val scale: Float = resources.displayMetrics.density
-        val buttonSizeInPixels = (48 * scale + 0.5f).toInt()
-
-        val buttonSize = buttonSizeInPixels
-
-        val totalWidth = buttonSize * buttonsInLastRow
-
-        // Add buttons rows dynamically
         var startIndex = 0
-        for (count in buttonCounts) {
+        var positionIndex = 0
+
+        for (count in buttonCounts.reversed()) {
             val endIndex = startIndex + count
             val rowLayout = LinearLayout(requireContext())
             rowLayout.layoutParams = LinearLayout.LayoutParams(
@@ -97,22 +87,75 @@ class DreamTeamFragment : Fragment() {
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
             rowLayout.orientation = LinearLayout.HORIZONTAL
+            rowLayout.gravity = Gravity.CENTER_HORIZONTAL
 
-            for (i in startIndex until endIndex) {
+            val positions = arrayOf("FW", "MF", "DF", "GK")
+
+            val rowPositions = positions[positionIndex]
+
+            for (i in (endIndex - 1) downTo startIndex) {
                 val button = Button(requireContext())
-                button.text = "Button ${i + 1}"
-                button.layoutParams = LinearLayout.LayoutParams(buttonSize, buttonSize)
+                button.text = rowPositions
+                val params = LinearLayout.LayoutParams(buttonSize, buttonSize)
+
+                params.marginEnd = marginBetweenButtons
+                button.layoutParams = params
+                button.setBackgroundResource(R.drawable.button_tshirt_sleeve)
+                button.setOnClickListener {
+                    showPromptAndUpdateButton(button)
+                }
                 rowLayout.addView(button)
             }
 
             dreamTeamBinding.buttonsContainer.addView(rowLayout)
 
             startIndex = endIndex
+
+            positionIndex = (positionIndex + 1) % positions.size
+
+
+            if (startIndex != buttonCounts.size) {
+                val rowLayoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+
+                rowLayoutParams.topMargin = marginBetweenRows
+                rowLayout.layoutParams = rowLayoutParams
+            }
         }
 
     }
 
-        companion object {
+    private fun convertDpToPx(dp: Float): Int {
+        val scale = resources.displayMetrics.density
+        return (dp * scale + 0.5f).toInt()
+    }
+
+    private fun showPromptAndUpdateButton(button: Button) {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_name_number, null)
+        val nameEditText = dialogView.findViewById<EditText>(R.id.nameEditText)
+        val numberEditText = dialogView.findViewById<EditText>(R.id.numberEditText)
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("Enter Name and Number")
+            .setView(dialogView)
+            .setPositiveButton("OK") { dialog, _ ->
+                val name = nameEditText.text.toString()
+                val number = numberEditText.text.toString()
+
+
+                button.text = "$name\n$number"
+
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    companion object {
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
