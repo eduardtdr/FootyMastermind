@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.footymastermind.databinding.FragmentTenaballBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +24,28 @@ class TenaballFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var tenaballBinding: FragmentTenaballBinding
+    val database =
+        FirebaseDatabase.getInstance("https://footymastermindapp-default-rtdb.europe-west1.firebasedatabase.app/")
+    val databaseReference = database.reference.child("tenable")
+    var question = ""
+    var answer1 = ""
+    var answer2 = ""
+    var answer3 = ""
+    var answer4 = ""
+    var answer5 = ""
+    var answer6 = ""
+    var answer7 = ""
+    var answer8 = ""
+    var answer9 = ""
+    var answer10 = ""
+
+    val auth = FirebaseAuth.getInstance()
+    val user = auth.currentUser
+
+    val questions = HashSet<Int>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,10 +59,16 @@ class TenaballFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tenaball, container, false)
+        tenaballBinding = FragmentTenaballBinding.inflate(inflater, container, false)
+        return tenaballBinding.root
     }
 
-    companion object {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
+        companion object {
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
