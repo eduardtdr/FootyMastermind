@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green"
+    android:background="#E8F5E9"
     tools:context=".TenaballFragment">
 
     <LinearLayout
@@ -22,14 +22,14 @@
         <TextView
             android:id="@+id/textViewQuestion"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:layout_margin="10dp"
             android:background="@color/white"
             android:gravity="center"
             android:padding="3dp"
             android:text="TextView"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textColor="@color/green"
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/textView1"
@@ -40,7 +40,7 @@
             android:gravity="center"
             android:text="TextView"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/textView2"
@@ -51,7 +51,7 @@
             android:gravity="center"
             android:text="TextView"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/textView3"
@@ -62,7 +62,7 @@
             android:gravity="center"
             android:text="TextView"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/textView4"
@@ -73,7 +73,7 @@
             android:gravity="center"
             android:text="TextView"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/textView5"
@@ -84,7 +84,7 @@
             android:gravity="center"
             android:text="TextView"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/textView6"
@@ -95,7 +95,7 @@
             android:gravity="center"
             android:text="TextView"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/textView7"
@@ -106,7 +106,7 @@
             android:gravity="center"
             android:text="TextView"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/textView8"
@@ -117,7 +117,7 @@
             android:gravity="center"
             android:text="TextView"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/textView9"
@@ -128,7 +128,7 @@
             android:gravity="center"
             android:text="TextView"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/textView10"
@@ -139,7 +139,7 @@
             android:gravity="center"
             android:text="TextView"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="25sp" />
 
     </LinearLayout>
 
@@ -162,51 +162,65 @@
             <TextView
                 android:layout_width="200dp"
                 android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:background="@color/white"
+                android:background="@color/green"
                 android:gravity="center"
                 android:text="Your Lives: "
                 android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:textSize="25sp" />
 
-            <Button
-                android:id="@+id/lifeA"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:background="@drawable/baseline_sports_soccer_24"
-                android:backgroundTint="@color/white"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/text_background">
 
-            <Button
-                android:id="@+id/lifeB"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:background="@drawable/baseline_sports_soccer_24"
-                android:backgroundTint="@color/white"/>
+                <Button
+                    android:id="@+id/lifeA"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/baseline_sports_soccer_24" />
 
-            <Button
-                android:id="@+id/lifeC"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:background="@drawable/baseline_sports_soccer_24"
-                android:backgroundTint="@color/white"/>
+                <Button
+                    android:id="@+id/lifeB"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/baseline_sports_soccer_24"
+                    android:backgroundTint="@color/white" />
+
+                <Button
+                    android:id="@+id/lifeC"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/baseline_sports_soccer_24"
+                    android:backgroundTint="@color/white" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
-        <TextView
+        <EditText
             android:id="@+id/textResponse"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@color/white"
+            android:background="@drawable/text_background"
             android:gravity="center"
-            android:text="TextView"
+            android:text=""
+            android:textColor="@color/green"
+            android:textSize="25sp" />
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:background="@color/green"
+            android:text="Submit" />
 
     </LinearLayout>
 

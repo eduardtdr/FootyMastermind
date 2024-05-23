@@ -5,9 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import android.graphics.Color
 import com.example.footymastermind.databinding.FragmentTenaballBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import kotlin.random.Random
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -39,11 +45,12 @@ class TenaballFragment : Fragment() {
     var answer8 = ""
     var answer9 = ""
     var answer10 = ""
+    var questionNumber = 0
+    var wrongAnswerCount = 0
+    val maxWrongAttempts = 3
 
     val auth = FirebaseAuth.getInstance()
     val user = auth.currentUser
-
-    val questions = HashSet<Int>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,10 +72,134 @@ class TenaballFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        questionNumber = Random.nextInt(1, 1)
+        tenaballBinding.submitButton.setOnClickListener{
+            checkAnswer()
+        }
+        questionNumber = Random.nextInt(1, 11)
+        gameLogic()
+    }
+
+    private fun gameLogic() {
+        databaseReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                question =
+                    snapshot.child(questionNumber.toString()).child("question").value.toString()
+                answer1 = snapshot.child(questionNumber.toString()).child("1").value.toString()
+                answer2 = snapshot.child(questionNumber.toString()).child("2").value.toString()
+                answer3 = snapshot.child(questionNumber.toString()).child("3").value.toString()
+                answer4 = snapshot.child(questionNumber.toString()).child("4").value.toString()
+                answer5 = snapshot.child(questionNumber.toString()).child("5").value.toString()
+                answer6 = snapshot.child(questionNumber.toString()).child("6").value.toString()
+                answer7 = snapshot.child(questionNumber.toString()).child("7").value.toString()
+                answer8 = snapshot.child(questionNumber.toString()).child("8").value.toString()
+                answer9 = snapshot.child(questionNumber.toString()).child("9").value.toString()
+                answer10 = snapshot.child(questionNumber.toString()).child("10").value.toString()
+
+                tenaballBinding.textViewQuestion.text = question
+                tenaballBinding.textView1.text = answer1
+                tenaballBinding.textView2.text = answer2
+                tenaballBinding.textView3.text = answer3
+                tenaballBinding.textView4.text = answer4
+                tenaballBinding.textView5.text = answer5
+                tenaballBinding.textView6.text = answer6
+                tenaballBinding.textView7.text = answer7
+                tenaballBinding.textView8.text = answer8
+                tenaballBinding.textView9.text = answer9
+                tenaballBinding.textView10.text = answer10
+
+                tenaballBinding.progressBarTenable.visibility = View.INVISIBLE
+                tenaballBinding.responseLayout.visibility = View.VISIBLE
+                tenaballBinding.linearLayoutQuestion.visibility = View.VISIBLE
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(activity, error.message, Toast.LENGTH_SHORT).show()
+            }
+        })
 
     }
 
-        companion object {
+    private fun checkAnswer() {
+        val userAnswer = tenaballBinding.textResponse.text.toString().trim()
+        if (userAnswer.length < 4) {
+            Toast.makeText(activity, "Answer should be at least 4 letters long", Toast.LENGTH_SHORT).show()
+        }
+        val correctAnswerIndex = (1..10).firstOrNull {
+            val answer = when (it) {
+                1 -> answer1
+                2 -> answer2
+                3 -> answer3
+                4 -> answer4
+                5 -> answer5
+                6 -> answer6
+                7 -> answer7
+                8 -> answer8
+                9 -> answer9
+                10 -> answer10
+                else -> ""
+            }
+            answer.contains(userAnswer, ignoreCase = true)
+        }
+        if (correctAnswerIndex != null) {
+            // Change the color of the corresponding TextView
+            val textView = when (correctAnswerIndex) {
+                1 -> tenaballBinding.textView1
+                2 -> tenaballBinding.textView2
+                3 -> tenaballBinding.textView3
+                4 -> tenaballBinding.textView4
+                5 -> tenaballBinding.textView5
+                6 -> tenaballBinding.textView6
+                7 -> tenaballBinding.textView7
+                8 -> tenaballBinding.textView8
+                9 -> tenaballBinding.textView9
+                10 -> tenaballBinding.textView10
+                else -> null
+            }
+            textView?.apply {
+                setBackgroundColor(Color.GREEN)
+                setTextColor(Color.WHITE)
+                animate().apply {
+                    scaleX(1.2f)
+                    scaleY(1.2f)
+                    duration = 200
+                    withEndAction {
+                        animate().apply {
+                            scaleX(1f)
+                            scaleY(1f)
+                            duration = 200
+                        }.start()
+                    }
+                }.start()
+                Toast.makeText(activity, "Correct Answer!", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            wrongAnswerCount++
+            if (wrongAnswerCount >= maxWrongAttempts) {
+                Toast.makeText(activity, "Game Over!", Toast.LENGTH_SHORT).show()
+                // final de joc
+            } else {
+                removeLife()
+                Toast.makeText(activity, "Incorrect Answer!", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun removeLife() {
+        when (wrongAnswerCount) {
+            1 -> tenaballBinding.lifeA.visibility = View.INVISIBLE
+            2 -> tenaballBinding.lifeB.visibility = View.INVISIBLE
+            3 -> {
+                tenaballBinding.lifeC.visibility = View.INVISIBLE
+                Toast.makeText(activity, "Game Over!", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+
+    companion object {
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
@@ -77,7 +208,7 @@ class TenaballFragment : Fragment() {
          * @param param2 Parameter 2.
          * @return A new instance of fragment SquadBuilderFragment.
          */
-        // TODO: Rename and change types and number of parameters
+// TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             TenaballFragment().apply {
