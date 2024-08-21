@@ -1,5 +1,6 @@
 package com.example.footymastermind
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.ktx.firestore
@@ -17,16 +18,30 @@ object TicTacToeData {
         }
     }
 
-    fun fetchTicTacToeModel(){
-        ticTacToeModel.value?.apply {
-            if(gameId != "-1") {
-                Firebase.firestore.collection("tic_tac_toe_games").document(gameId)
-                    .addSnapshotListener { value, error ->
-                        val model = value?.toObject(TicTacToeModel::class.java)
+    fun fetchTicTacToeModel() {
+        val currentModel = ticTacToeModel.value
+        if (currentModel != null && currentModel.gameId != "-1") {
+            Firebase.firestore.collection("tic_tac_toe_games").document(currentModel.gameId)
+                .addSnapshotListener { value, error ->
+                    if (error != null) {
+                        // Handle the error appropriately
+                        Log.e("TicTacToeData", "Error fetching document", error)
+                        return@addSnapshotListener
+                    }
+
+                    val model = value?.toObject(TicTacToeModel::class.java)
+                    if (model != null) {
                         _ticTacToeModel.postValue(model!!)
+                    } else {
+                        // Handle the case where the document doesn't exist
+                        Log.w("TicTacToeData", "Document does not exist")
+                    }
                 }
-            }
+        } else {
+            // Handle the case where the model is null or gameId is invalid
+            Log.w("TicTacToeData", "Invalid gameId or model is null")
         }
     }
+
 
 }

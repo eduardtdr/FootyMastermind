@@ -42,7 +42,7 @@
         android:columnCount="4"
         android:rowCount="4">
 
-        <EditText
+        <TextView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@drawable/baseline_sports_soccer_24"
@@ -52,7 +52,7 @@
             android:importantForAccessibility="no"
             android:id="@+id/gr_11"/>
 
-        <EditText
+        <TextView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@color/white"
@@ -62,7 +62,7 @@
             android:id="@+id/gr_12"
             android:scrollbars="vertical" />
 
-        <EditText
+        <TextView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@color/white"
@@ -73,7 +73,7 @@
             android:id="@+id/gr_13"
             android:scrollbars="vertical" />
 
-        <EditText
+        <TextView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@color/white"
@@ -83,7 +83,7 @@
             android:id="@+id/gr_14"
             android:scrollbars="vertical" />
 
-        <EditText
+        <TextView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@color/white"
@@ -126,7 +126,7 @@
             android:tag="2"
             android:scrollbars="vertical" />
 
-        <EditText
+        <TextView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@color/white"
@@ -136,10 +136,10 @@
             android:id="@+id/gr_31"
             android:scrollbars="vertical" />
 
-        <EditText
+        <Button
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:background="@color/white"
+            android:backgroundTint="@color/white"
             android:gravity="center"
             android:hint="Type player name"
             android:inputType="textMultiLine"
@@ -158,10 +158,10 @@
             android:tag="4"
             android:scrollbars="vertical" />
 
-        <EditText
+        <Button
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:background="@color/white"
+            android:backgroundTint="@color/white"
             android:gravity="center"
             android:hint="Type player name"
             android:inputType="textMultiLine"
@@ -169,7 +169,7 @@
             android:tag="5"
             android:scrollbars="vertical" />
 
-        <EditText
+        <TextView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@color/white"
@@ -179,10 +179,10 @@
             android:id="@+id/gr_41"
             android:scrollbars="vertical" />
 
-        <EditText
+        <Button
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:background="@color/white"
+            android:backgroundTint="@color/white"
             android:gravity="center"
             android:hint="Type player name"
             android:inputType="textMultiLine"
@@ -190,10 +190,10 @@
             android:tag="6"
             android:scrollbars="vertical" />
 
-        <EditText
+        <Button
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:background="@color/white"
+            android:backgroundTint="@color/white"
             android:gravity="center"
             android:hint="Type player name"
             android:inputType="textMultiLine"
