@@ -22,6 +22,13 @@
             android:exported="false"
             android:theme="@style/AppThemeSplash"/>
         <activity
+            android:name=".GuessWhoData"
+            android:exported="false" />
+        <activity
+            android:name=".GuessWhoStart"
+            android:exported="false"
+            android:theme="@style/AppThemeSplash"/>
+        <activity
             android:name=".DescriptionActivity"
             android:exported="false"
             android:theme="@style/AppThemeSplash" />

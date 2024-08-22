@@ -121,7 +121,7 @@
                     android:id="@+id/name_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name 2"
+                    android:text="Name"
                     android:textSize="14sp"
                     android:gravity="center"
                     android:layout_marginTop="4dp"/>
@@ -156,7 +156,7 @@
                     android:id="@+id/name_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name 2"
+                    android:text="Name"
                     android:textSize="14sp"
                     android:gravity="center"
                     android:layout_marginTop="4dp"/>
@@ -190,7 +190,7 @@
                     android:id="@+id/name_4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name 2"
+                    android:text="Name"
                     android:textSize="14sp"
                     android:gravity="center"
                     android:layout_marginTop="4dp"/>
@@ -225,7 +225,7 @@
                     android:id="@+id/name_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name 2"
+                    android:text="Name"
                     android:textSize="14sp"
                     android:gravity="center"
                     android:layout_marginTop="4dp"/>
@@ -259,7 +259,7 @@
                     android:id="@+id/name_6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name 2"
+                    android:text="Name"
                     android:textSize="14sp"
                     android:gravity="center"
                     android:layout_marginTop="4dp"/>
@@ -293,7 +293,7 @@
                     android:id="@+id/name_7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name 2"
+                    android:text="Name"
                     android:textSize="14sp"
                     android:gravity="center"
                     android:layout_marginTop="4dp"/>
@@ -327,7 +327,7 @@
                     android:id="@+id/name_8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name 2"
+                    android:text="Name"
                     android:textSize="14sp"
                     android:gravity="center"
                     android:layout_marginTop="4dp"/>
@@ -361,7 +361,7 @@
                     android:id="@+id/name_9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name 2"
+                    android:text="Name"
                     android:textSize="14sp"
                     android:gravity="center"
                     android:layout_marginTop="4dp"/>
@@ -396,7 +396,7 @@
                     android:id="@+id/name_10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name 2"
+                    android:text="Name"
                     android:textSize="14sp"
                     android:gravity="center"
                     android:layout_marginTop="4dp"/>
@@ -431,7 +431,7 @@
                     android:id="@+id/name_11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name 2"
+                    android:text="Name"
                     android:textSize="14sp"
                     android:gravity="center"
                     android:layout_marginTop="4dp"/>
@@ -466,7 +466,7 @@
                     android:id="@+id/name_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name 2"
+                    android:text="Name"
                     android:textSize="14sp"
                     android:gravity="center"
                     android:layout_marginTop="4dp"/>
@@ -501,7 +501,7 @@
                     android:id="@+id/name_13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name 2"
+                    android:text="Name"
                     android:textSize="14sp"
                     android:gravity="center"
                     android:layout_marginTop="4dp"/>
@@ -535,7 +535,7 @@
                 android:id="@+id/name_14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name 2"
+                android:text="Name"
                 android:textSize="14sp"
                 android:gravity="center"
                 android:layout_marginTop="4dp"/>
@@ -570,7 +570,7 @@
                 android:id="@+id/name_15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name 2"
+                android:text="Name"
                 android:textSize="14sp"
                 android:gravity="center"
                 android:layout_marginTop="4dp"/>
