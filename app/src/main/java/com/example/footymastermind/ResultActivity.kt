@@ -49,8 +49,16 @@ class ResultActivity : AppCompatActivity() {
                 if (playerKeys.isNotEmpty()) {
                     val randomPlayerKey = playerKeys[Random.nextInt(playerKeys.size)]
                     val playerSnapshot = snapshot.child(randomPlayerKey)
+
+                    // Update the UI with player data
                     updateUIWithPlayerData(playerSnapshot)
-                    updateUserOwnedPlayers(randomPlayerKey) // Add the won player to the user's owned players
+
+                    // Update user-owned players in the database
+                    if (user != null) {
+                        updateUserOwnedPlayers(randomPlayerKey, playerSnapshot)
+                    } else {
+                        Log.e("ResultActivity", "No user is currently logged in.")
+                    }
                 } else {
                     Log.e("ResultActivity", "No players found in the database.")
                 }
@@ -107,34 +115,29 @@ class ResultActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateUserOwnedPlayers(playerKey: String) {
-        user?.let {
-            val userUID = it.uid
-            val userReference = FirebaseDatabase.getInstance().reference.child("users").child(userUID)
+    private fun updateUserOwnedPlayers(playerKey: String, playerSnapshot: DataSnapshot) {
+        val userId = user?.uid ?: return
 
-            userReference.child("owned_players").addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(userSnapshot: DataSnapshot) {
-                    val ownedPlayers = userSnapshot.getValue<List<String>>()?.toMutableList() ?: mutableListOf()
+        // Create a map for the player data
+        val playerData = mapOf(
+            "name" to (playerSnapshot.key ?: "Unknown Player"),
+            "country" to (playerSnapshot.child("country").getValue(String::class.java) ?: "Unknown Country"),
+            "currentClub" to (playerSnapshot.child("current club").getValue(String::class.java) ?: "Unknown Club"),
+            "image" to (playerSnapshot.child("image").getValue(String::class.java) ?: ""),
+            "overall" to (playerSnapshot.child("overall").getValue(Int::class.java) ?: 0),
+            "position" to (playerSnapshot.child("position").getValue(String::class.java) ?: "Unknown Position")
+        )
 
-                    if (!ownedPlayers.contains(playerKey)) {
-                        ownedPlayers.add(playerKey)
+        // Reference to the user's data in the database
+        val userReference = database.reference.child("users").child(userId).child("ownedPlayers").child(playerKey)
 
-                        userReference.child("owned_players").setValue(ownedPlayers)
-                            .addOnSuccessListener {
-                                Log.d("ResultActivity", "User owned_players updated successfully.")
-                            }
-                            .addOnFailureListener { e ->
-                                Log.e("ResultActivity", "Failed to update user owned_players: ${e.message}")
-                            }
-                    } else {
-                        Log.d("ResultActivity", "Player $playerKey is already owned.")
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    Log.e("ResultActivity", "Failed to read user data: ${error.message}")
-                }
-            })
+        // Update the database with player data
+        userReference.setValue(playerData).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.d("ResultActivity", "Player added to user's owned players.")
+            } else {
+                Log.e("ResultActivity", "Failed to add player to user's owned players: ${task.exception?.message}")
+            }
         }
     }
 }

@@ -1,10 +1,16 @@
 package com.example.footymastermind
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.footymastermind.databinding.FragmentGuessWhoBinding
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import kotlin.random.Random
+import kotlin.random.nextInt
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +27,9 @@ class GuessWhoFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var guessWhoBinding: FragmentGuessWhoBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,8 +43,55 @@ class GuessWhoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_guess_who, container, false)
+        guessWhoBinding = FragmentGuessWhoBinding.inflate(inflater, container, false)
+        return guessWhoBinding.root    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        guessWhoBinding.playButton.setOnClickListener{
+            createGame()
+        }
+
+        guessWhoBinding.joinButton.setOnClickListener{
+            joinGame()
+        }
     }
+
+    fun createGame(){
+        GuessWhoData.myID = "Red"
+        GuessWhoData.saveGuessWhoModel(
+            GuessWhoModel(
+                gameStatus = GameStatus.CREATED,
+                gameId = Random.nextInt(1000..9000).toString()
+            )
+        )
+        startGame()
+    }
+
+    fun joinGame(){
+        var gameId = guessWhoBinding.gameIdInput.text.toString()
+        if(gameId.isEmpty()){
+            guessWhoBinding.gameIdInput.setError("Enter game ID")
+            return
+        }
+        GuessWhoData.myID = "Green"
+        Firebase.firestore.collection("guess_who_games").document(gameId).get().addOnSuccessListener {
+            val model = it?.toObject(GuessWhoModel::class.java)
+            if(model==null){
+                guessWhoBinding.gameIdInput.setError("Enter valid game ID")
+            }else{
+                model.gameStatus = GameStatus.JOINED
+                GuessWhoData.saveGuessWhoModel(model)
+                startGame()
+            }
+        }
+    }
+
+    fun startGame(){
+        startActivity(Intent(requireActivity(), GuessWhoStart::class.java))
+    }
+
 
     companion object {
         /**

@@ -1,0 +1,632 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".TicTacToeStart"
+    android:background="@color/grey">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        tools:context=".TicTacToeStart"
+        android:background="@color/grey">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/guess_who"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:layout_margin="0dp"
+            android:layout_gravity="center"
+            android:padding="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/game_status_text"
+            android:text="@string/game_not_started"
+            android:textStyle="bold"
+            android:textSize="32sp"
+            android:layout_margin="0dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:letterSpacing="0.04"
+            android:textColor="@color/green"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:text="Start game"
+            android:id="@+id/start_game_button"/>
+
+        <!-- GridLayout for images and names -->
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:rowCount="5"
+            android:columnCount="3"
+            android:layout_marginLeft="20dp"
+            android:padding="16dp">
+
+            <!-- Add items for 15 images and names -->
+            <!-- Repeat this structure for each grid item (Image and Text) -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="8dp"
+                android:gravity="center">
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:id="@+id/image_1"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:layout_gravity="center"/>
+
+                    <Button
+                        android:id="@+id/button_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/baseline_do_not_disturb_24"
+                        android:visibility="invisible" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/name_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name 1"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <!-- Repeat similar blocks for other 14 images and names -->
+            <!-- For example, below is the next grid item -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:id="@+id/image_2"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:layout_gravity="center"/>
+
+                    <Button
+                        android:id="@+id/button_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/baseline_do_not_disturb_24"
+                        android:visibility="invisible" />
+                </FrameLayout>
+                <TextView
+                    android:id="@+id/name_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name 2"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:id="@+id/image_3"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:layout_gravity="center"/>
+
+                    <Button
+                        android:id="@+id/button_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/baseline_do_not_disturb_24"
+                        android:visibility="invisible" />
+                </FrameLayout>
+                <TextView
+                    android:id="@+id/name_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name 2"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:id="@+id/image_4"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:layout_gravity="center"/>
+
+                    <Button
+                        android:id="@+id/button_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/baseline_do_not_disturb_24"
+                        android:visibility="invisible" />
+                </FrameLayout>
+                <TextView
+                    android:id="@+id/name_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name 2"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:id="@+id/image_5"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:layout_gravity="center"/>
+
+                    <Button
+                        android:id="@+id/button_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/baseline_do_not_disturb_24"
+                        android:visibility="invisible" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/name_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name 2"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:id="@+id/image_6"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:layout_gravity="center"/>
+
+                    <Button
+                        android:id="@+id/button_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/baseline_do_not_disturb_24"
+                        android:visibility="invisible" />
+                </FrameLayout>
+                <TextView
+                    android:id="@+id/name_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name 2"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:id="@+id/image_7"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:layout_gravity="center"/>
+
+                    <Button
+                        android:id="@+id/button_7"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/baseline_do_not_disturb_24"
+                        android:visibility="invisible" />
+                </FrameLayout>
+                <TextView
+                    android:id="@+id/name_7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name 2"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:id="@+id/image_8"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:layout_gravity="center"/>
+
+                    <Button
+                        android:id="@+id/button_8"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/baseline_do_not_disturb_24"
+                        android:visibility="invisible" />
+                </FrameLayout>
+                <TextView
+                    android:id="@+id/name_8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name 2"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:id="@+id/image_9"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:layout_gravity="center"/>
+
+                    <Button
+                        android:id="@+id/button_9"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/baseline_do_not_disturb_24"
+                        android:visibility="invisible" />
+                </FrameLayout>
+                <TextView
+                    android:id="@+id/name_9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name 2"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:id="@+id/image_10"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:layout_gravity="center"/>
+
+                    <Button
+                        android:id="@+id/button_10"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/baseline_do_not_disturb_24"
+                        android:visibility="invisible" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/name_10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name 2"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:id="@+id/image_11"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:layout_gravity="center"/>
+
+                    <Button
+                        android:id="@+id/button_11"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/baseline_do_not_disturb_24"
+                        android:visibility="invisible" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/name_11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name 2"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:id="@+id/image_12"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:layout_gravity="center"/>
+
+                    <Button
+                        android:id="@+id/button_12"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/baseline_do_not_disturb_24"
+                        android:visibility="invisible" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/name_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name 2"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:id="@+id/image_13"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:layout_gravity="center"/>
+
+                    <Button
+                        android:id="@+id/button_13"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/baseline_do_not_disturb_24"
+                        android:visibility="invisible" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/name_13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name 2"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="8dp"
+            android:gravity="center">
+
+            <FrameLayout
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center">
+                <ImageView
+                    android:id="@+id/image_14"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    tools:srcCompat="@tools:sample/avatars"
+                    android:layout_gravity="center"/>
+
+                <Button
+                    android:id="@+id/button_14"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/baseline_do_not_disturb_24"
+                    android:visibility="invisible" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/name_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name 2"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+            <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="8dp"
+            android:gravity="center">
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:id="@+id/image_15"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:layout_gravity="center"/>
+
+                    <Button
+                        android:id="@+id/button_15"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/baseline_do_not_disturb_24"
+                        android:visibility="invisible" />
+                </FrameLayout>
+
+            <TextView
+                android:id="@+id/name_15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name 2"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+            <!-- Continue adding similar blocks until you have 15 items in total -->
+
+        </GridLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="16dp">
+
+        <!-- EditText for answers/questions -->
+        <EditText
+            android:id="@+id/answer_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Enter your answer or question"
+            android:padding="12dp"
+            android:textSize="18sp"/>
+
+        <!-- Target image and name -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginLeft="16dp">
+
+            <ImageView
+                android:id="@+id/target_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                tools:srcCompat="@tools:sample/avatars"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/target_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Target Name"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:layout_marginLeft="16dp"/>
+    </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
