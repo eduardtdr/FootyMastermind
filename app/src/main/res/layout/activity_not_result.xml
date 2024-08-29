@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NotResultActivity">
+
+    <!-- Vertical LinearLayout to hold all the elements centered -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/buttonPrize"
+            android:layout_width="280dp"
+            android:layout_height="300dp"
+            android:text=""
+            android:background="@drawable/baseline_emoji_events_24"/>
+        <TextView
+            android:id="@+id/textViewCongratulations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Unfortunately, your performance wasn't enough to get you a prize"
+            android:textColor="@color/green"
+            android:textSize="24sp"
+            android:layout_marginBottom="16dp"
+            android:padding="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/textViewBetterLuck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Better luck next time!"
+            android:textColor="@color/green"
+            android:textSize="24sp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center" />
+
+        <!-- Exit Button -->
+        <Button
+            android:id="@+id/buttonExit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/white"
+            android:text="Exit"
+            android:textColor="@color/green"
+            android:textSize="16sp"
+            android:gravity="center"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

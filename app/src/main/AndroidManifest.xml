@@ -48,6 +48,11 @@
             android:label="@string/title_activity_result"
             android:theme="@style/SignupTheme" />
         <activity
+            android:name=".NotResultActivity"
+            android:exported="false"
+            android:label="@string/title_activity_not_result"
+            android:theme="@style/AppThemeSplash" />
+        <activity
             android:name=".TriviaFragment"
             android:exported="false"
             android:parentActivityName=".TriviaFragment"

@@ -62,7 +62,7 @@ class GuessWhoFragment : Fragment() {
         GuessWhoData.myID = "Red"
         GuessWhoData.saveGuessWhoModel(
             GuessWhoModel(
-                gameStatus = GameStatus.CREATED,
+                gameStatus = GuessGameStatus.CREATED,
                 gameId = Random.nextInt(1000..9000).toString()
             )
         )
@@ -81,7 +81,7 @@ class GuessWhoFragment : Fragment() {
             if(model==null){
                 guessWhoBinding.gameIdInput.setError("Enter valid game ID")
             }else{
-                model.gameStatus = GameStatus.JOINED
+                model.gameStatus = GuessGameStatus.JOINED
                 GuessWhoData.saveGuessWhoModel(model)
                 startGame()
             }

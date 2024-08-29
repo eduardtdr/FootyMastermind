@@ -1,21 +1,40 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/football_pitch">
 
+    <!-- TextView for displaying the score in the top-left corner -->
+    <TextView
+        android:id="@+id/score_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Score: 0"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:padding="16dp"
+        android:textStyle="bold" />
+
+    <!-- Spinner in the top-right corner -->
     <Spinner
         android:id="@+id/config_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
         android:entries="@array/configurations"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"/>
 
+    <!-- LinearLayout for buttons, below the Spinner -->
     <LinearLayout
         android:id="@+id/buttons_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"/>
+        android:layout_below="@id/score_text_view"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"/>
 
-</LinearLayout>
+</RelativeLayout>

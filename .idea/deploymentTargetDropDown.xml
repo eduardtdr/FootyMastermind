@@ -7,18 +7,6 @@
       </entry>
       <entry key="app">
         <State>
-          <targetSelectedWithDropDown>
-            <Target>
-              <type value="QUICK_BOOT_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\eduar\.android\avd\Pixel_5_API_31.avd" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-08-19T19:54:14.783923700Z" />
           <multipleDevicesSelectedInDropDown value="true" />
           <runningDeviceTargetsSelectedWithDialog>
             <Target>
@@ -37,7 +25,7 @@
               <deviceKey>
                 <Key>
                   <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\eduar\.android\avd\Pixel_5_API_31.avd" />
+                  <value value="C:\Users\eduar\.android\avd\Small_Phone_API_31.avd" />
                 </Key>
               </deviceKey>
             </Target>
