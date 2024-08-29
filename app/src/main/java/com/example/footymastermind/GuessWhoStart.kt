@@ -2,6 +2,7 @@ package com.example.footymastermind
 
 import android.os.Bundle
 import android.util.Log
+import android.content.Intent
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -31,10 +32,19 @@ class GuessWhoStart : AppCompatActivity(), View.OnClickListener {
             startGame()
         }
 
+        guessWhoBinding.submitButton.setOnClickListener {
+            handleSubmit()
+        }
+
+        guessWhoBinding.exitButton.setOnClickListener {
+            redirectToLoserScreen()
+        }
+
         GuessWhoData.guessWhoModel.observe(this) {
             guessWhoModel = it
             setUI()
         }
+
 
         listenForGameUpdates()
     }
@@ -79,61 +89,121 @@ class GuessWhoStart : AppCompatActivity(), View.OnClickListener {
                 Log.e("GuessWhoStart", "Cached selected players not available.")
             }
 
-            guessWhoBinding.startGameButton.visibility = View.VISIBLE
+            guessWhoBinding.startGameButton.visibility = if (gameStatus == GuessGameStatus.INPROGRESS) View.INVISIBLE else View.VISIBLE
+            guessWhoBinding.exitButton.visibility = if (gameStatus == GuessGameStatus.FINISHED) View.VISIBLE else View.GONE
 
-            guessWhoBinding.gameStatusText.text =
-                when (gameStatus) {
-                    GuessGameStatus.CREATED -> {
-                        guessWhoBinding.startGameButton.visibility = View.INVISIBLE
-                        "Game ID: $gameId"
-                    }
-                    GuessGameStatus.JOINED -> {
-                        "Click on start game"
-                    }
-                    GuessGameStatus.INPROGRESS -> {
-                        guessWhoBinding.startGameButton.visibility = View.INVISIBLE
-                        when (GuessWhoData.myID) {
-                            currentPlayer -> "Your turn"
-                            else -> "$currentPlayer's turn"
-                        }
-                    }
-                    GuessGameStatus.FINISHED -> {
-                        if (winner.isNotEmpty()) {
-                            when (GuessWhoData.myID) {
-                                winner -> "You won!"
-                                else -> "$winner won!"
-                            }
-                        } else "DRAW"
+            guessWhoBinding.gameStatusText.text = when (gameStatus) {
+                GuessGameStatus.CREATED -> {
+                    guessWhoBinding.startGameButton.visibility = View.INVISIBLE
+                    guessWhoBinding.exitButton.visibility = View.GONE
+                    "Game ID: $gameId"
+                }
+                GuessGameStatus.JOINED -> {
+                    guessWhoBinding.startGameButton.visibility = View.VISIBLE
+                    guessWhoBinding.exitButton.visibility = View.GONE
+                    "Click on start game"
+                }
+                GuessGameStatus.INPROGRESS -> {
+                    guessWhoBinding.startGameButton.visibility = View.INVISIBLE
+                    guessWhoBinding.exitButton.visibility = View.GONE
+                    when (GuessWhoData.myID) {
+                        currentPlayer -> "Your turn"
+                        else -> "$currentPlayer's turn"
                     }
                 }
+                GuessGameStatus.FINISHED -> {
+                    guessWhoBinding.startGameButton.visibility = View.GONE
+                    guessWhoBinding.exitButton.visibility = View.VISIBLE
+                    when (winner) {
+                        GuessWhoData.myID -> "You won!"
+                        else -> "$winner won!"
+                    }
+                }
+
+                }
+
+            guessWhoBinding.answerInput.isEnabled = GuessWhoData.myID == currentPlayer
+
+            if (gameStatus == GuessGameStatus.INPROGRESS) {
+                updateTargetPlayerUI()
+            } else {
+                // Clear the target player info if not in progress
+                guessWhoBinding.targetName.text = ""
+                guessWhoBinding.targetImage.setImageDrawable(null)
+            }
         }
     }
 
     fun startGame() {
-        // Fetch and update the selected players before starting the game
         updatePlayers { selectedPlayers ->
-            guessWhoModel?.apply {
-                cachedSelectedPlayers = selectedPlayers
-                // Update the game status to INPROGRESS with the updated selected players
-                val updatedModel = GuessWhoModel(
-                    gameId = gameId,
-                    winner = winner,
-                    gameStatus = GuessGameStatus.INPROGRESS,
-                    selectedPlayers = selectedPlayers,  // Updated selectedPlayers
-                    currentPlayer = currentPlayer
-                )
+            if (selectedPlayers.isNotEmpty()) {
+                guessWhoModel?.apply {
+                    cachedSelectedPlayers = selectedPlayers
 
-                // Update the game data in Firebase
-                updateGameData(updatedModel)
+                    // Randomly select a target player for Red and Green
+                    val targetPlayerRed = selectedPlayers.random()
+                    val targetPlayerGreen = selectedPlayers.random()
 
-                // Directly update the UI with the updated selected players
-                updateUIWithPlayers(selectedPlayers)
+                    Log.d("GuessWhoStart", "Target Player Red: $targetPlayerRed")
+                    Log.d("GuessWhoStart", "Target Player Green: $targetPlayerGreen")
+
+                    // Update the game model with the target players
+                    val updatedModel = GuessWhoModel(
+                        gameId = gameId,
+                        winner = winner,
+                        gameStatus = GuessGameStatus.INPROGRESS,
+                        selectedPlayers = selectedPlayers,
+                        currentPlayer = currentPlayer,
+                        targetPlayerRed = targetPlayerRed,  // Assign target player for Red
+                        targetPlayerGreen = targetPlayerGreen  // Assign target player for Green
+                    )
+
+                    // Update the game data in Firebase
+                    updateGameData(updatedModel)
+
+                    // Update the UI to reflect the new target players
+                    updateUIWithPlayers(selectedPlayers)
+                    updateTargetPlayerUI()  // New function to update target player UI
+                }
+
+                listenForGameUpdates()
+            } else {
+                Toast.makeText(this, "Not enough players to start the game.", Toast.LENGTH_SHORT).show()
             }
-
-            listenForGameUpdates()
-
         }
     }
+
+    fun updateTargetPlayerUI() {
+        guessWhoModel?.apply {
+            val targetPlayer = when (GuessWhoData.myID) {
+                "Red" -> targetPlayerRed
+                "Green" -> targetPlayerGreen
+                else -> null
+            }
+
+            if (targetPlayer == null) {
+                Log.e("GuessWhoStart", "Target player is null.")
+            } else {
+                Log.d("GuessWhoStart", "Target player: $targetPlayer")
+            }
+
+            targetPlayer?.let {
+                // Find and update the target player ImageView and TextView
+                val targetImageView: ImageView? = guessWhoBinding.targetImage
+                val targetNameView: TextView? = guessWhoBinding.targetName
+
+                Log.d("GuessWhoStart", "Updating UI with target player: ${it.name}")
+
+                targetNameView?.text = it.name
+                targetImageView?.let { imageView ->
+                    Glide.with(this@GuessWhoStart)
+                        .load(it.image)
+                        .into(imageView)
+                }
+            }
+        }
+    }
+
 
     // Helper function to update the UI with selected players
     private fun updateUIWithPlayers(selectedPlayers: List<Player>) {
@@ -162,9 +232,78 @@ class GuessWhoStart : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    private fun handleSubmit() {
+        val answer = guessWhoBinding.answerInput.text.toString()
+        if (answer.isNotBlank()) {
+            guessWhoModel?.apply {
+                // Determine the opponent's target player based on the current player
+                val opponentTargetPlayer = if (GuessWhoData.myID == "Red") targetPlayerGreen else targetPlayerRed
+                val isCorrect = answer.equals(opponentTargetPlayer?.name, ignoreCase = true)
+
+                if (isCorrect) {
+                    // If the answer is correct, update the model to declare the current player as the winner
+                    val updatedModel = copy(
+                        gameStatus = GuessGameStatus.FINISHED,
+                        winner = GuessWhoData.myID  // Current player is the winner
+                    )
+
+                    // Save the updated model to Firebase
+                    GuessWhoData.saveGuessWhoModel(updatedModel)
+
+                    // Redirect to the winner's screen
+                    redirectToWinnerScreen()
+                } else {
+                    // If the answer is incorrect, update the model with the current question and switch turn
+                    val updatedModel = copy(
+                        currentQuestion = answer,
+                        currentPlayer = if (GuessWhoData.myID == "Red") "Green" else "Red"  // Switch turn
+                    )
+
+                    // Save the updated model to Firebase
+                    GuessWhoData.saveGuessWhoModel(updatedModel)
+
+                    // Clear the input field
+                    guessWhoBinding.answerInput.text.clear()
+
+                    // Redirect based on game status if it changes to finished
+                    // (No redirection here, only switch turns)
+                }
+            }
+        } else {
+            Toast.makeText(this, "Please enter a question or answer.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    private fun redirectToWinnerScreen() {
+        // Intent to start the WinnerActivity (replace with your actual activity class)
+        val intent = Intent(this, ResultActivity::class.java)
+        startActivity(intent)
+        finish()  // Optional: finish the current activity if you want to close it
+    }
+
+    private fun redirectToLoserScreen() {
+        // Intent to start the LoserActivity (replace with your actual activity class)
+        val intent = Intent(this, NotResultActivity::class.java)
+        startActivity(intent)
+        finish()  // Optional: finish the current activity if you want to close it
+    }
+
+    private fun updateGameQuestion(answer: String) {
+        guessWhoModel?.apply {
+            // Update the current question/answer in the model
+            val updatedModel = copy(currentQuestion = answer)
+
+            // Save the updated model to Firebase
+            GuessWhoData.saveGuessWhoModel(updatedModel)
+        }
+    }
+
     fun updateGameData(model: GuessWhoModel) {
         GuessWhoData.saveGuessWhoModel(model)
     }
+
+
 
     override fun onClick(v: View?) {
         guessWhoModel?.apply {
@@ -193,6 +332,15 @@ class GuessWhoStart : AppCompatActivity(), View.OnClickListener {
                         guessWhoModel = it
                         cachedSelectedPlayers = it.selectedPlayers
                         setUI()  // Update UI based on the new game state
+                        updateTargetPlayerUI()
+
+                        if (it.gameStatus == GuessGameStatus.FINISHED) {
+                            if (it.winner == GuessWhoData.myID) {
+                                redirectToWinnerScreen()
+                            } else {
+                                redirectToLoserScreen()
+                            }
+                        }
                     }
                 }
 

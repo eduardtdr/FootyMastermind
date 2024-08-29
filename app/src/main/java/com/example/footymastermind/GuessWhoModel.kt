@@ -11,7 +11,10 @@ data class GuessWhoModel (
     var winner : String = "",
     var gameStatus : GuessGameStatus = GuessGameStatus.CREATED,
     var currentPlayer : String = (arrayOf("Green","Red"))[Random.nextInt(2)],
-    var selectedPlayers: List<Player> = emptyList()
+    var selectedPlayers: List<Player> = emptyList(),
+    val targetPlayerRed: Player? = null,
+    val targetPlayerGreen: Player? = null,
+    val currentQuestion: String =""
 )
 
 enum class GuessGameStatus {
