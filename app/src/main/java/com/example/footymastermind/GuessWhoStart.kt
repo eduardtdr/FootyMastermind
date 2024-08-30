@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.content.Intent
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -21,10 +22,34 @@ class GuessWhoStart : AppCompatActivity(), View.OnClickListener {
     private val database = FirebaseDatabase.getInstance("https://footymastermindapp-default-rtdb.europe-west1.firebasedatabase.app/")
     private val databaseReference = database.reference.child("players")
 
+    private val imageViews = arrayOfNulls<ImageView>(15)
+    private val buttons = arrayOfNulls<Button>(15)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         guessWhoBinding = ActivityStartGuessWhoBinding.inflate(layoutInflater)
         setContentView(guessWhoBinding.root)
+
+        for (i in 0 until 15) {
+            val imageId = resources.getIdentifier("image_${i + 1}", "id", packageName)
+            val buttonId = resources.getIdentifier("button_${i + 1}", "id", packageName)
+
+            val imageView = findViewById<ImageView>(imageId)
+            val button = findViewById<Button>(buttonId)
+
+            // Initially hide the buttons
+            button.visibility = View.INVISIBLE
+
+            // Set OnClickListener for each ImageView to toggle the corresponding Button
+            imageView.setOnClickListener {
+                button.visibility = View.VISIBLE
+            }
+
+            // Set OnClickListener for each Button to hide itself when clicked
+            button.setOnClickListener {
+                button.visibility = View.INVISIBLE
+            }
+        }
 
         GuessWhoData.fetchGuessWhoModel()
 

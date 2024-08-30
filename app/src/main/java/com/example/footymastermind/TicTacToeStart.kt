@@ -32,7 +32,7 @@ class TicTacToeStart : AppCompatActivity(), View.OnClickListener {
     var club = ""
     private var turnStartTime: Long = 0
     private var switchCount: Int = 0
-    private val TURN_DURATION_MS = 15000L // 10 seconds
+    private val TURN_DURATION_MS = 55000L // 10 seconds
     private val MAX_SWITCHES = 20
 
 
@@ -57,6 +57,10 @@ class TicTacToeStart : AppCompatActivity(), View.OnClickListener {
 
         ticTacToeBinding.startGameButton.setOnClickListener {
             startGame()
+        }
+
+        ticTacToeBinding.exitButton.setOnClickListener {
+            redirectToLoss()
         }
 
         TicTacToeData.ticTacToeModel.observe(this){
@@ -151,23 +155,29 @@ class TicTacToeStart : AppCompatActivity(), View.OnClickListener {
                 when(gameStatus){
                     GameStatus.CREATED -> {
                         ticTacToeBinding.startGameButton.visibility = View.INVISIBLE
+                        ticTacToeBinding.exitButton.visibility = View.GONE
                         "Game ID: " + gameId
                     }
                     GameStatus.JOINED -> {
+                        ticTacToeBinding.startGameButton.visibility = View.VISIBLE
+                        ticTacToeBinding.exitButton.visibility = View.GONE
                         "Click on start game"
                     }
                     GameStatus.INPROGRESS -> {
                         ticTacToeBinding.startGameButton.visibility = View.INVISIBLE
+                        ticTacToeBinding.exitButton.visibility = View.GONE
                         when(TicTacToeData.myID) {
                             currentPlayer -> "Your turn"
                             else -> currentPlayer + " turn"
                         }
                     }
                     GameStatus.FINISHED -> {
+                        ticTacToeBinding.startGameButton.visibility = View.INVISIBLE
+                        ticTacToeBinding.exitButton.visibility = View.VISIBLE
                         if(winner.isNotEmpty()) {
                             when(TicTacToeData.myID){
                                 winner -> "You won!"
-                                else -> winner + "won!"
+                                else -> winner + " won!"
                             }
                         }
                         else "DRAW"
@@ -189,11 +199,11 @@ class TicTacToeStart : AppCompatActivity(), View.OnClickListener {
 //    )
 
     private val footballClubs = listOf(
-        "Liverpool", "Manchester City", "Brentford"
+        "Liverpool", "Barcelona", "Brentford"
     )
 
     private val countries = listOf(
-        "Spain", "England", "Germany")
+        "Spain", "England", "Brazil")
 
 
     fun startGame() {
@@ -280,17 +290,42 @@ class TicTacToeStart : AppCompatActivity(), View.OnClickListener {
                 ) {
                     gameStatus = GameStatus.FINISHED
                     winner = filledPos[i[0]]
+                    redirectToPrize()
+                    return
                 }
             }
 
             if (filledPos.none() { it.isEmpty() }) {
                 gameStatus = GameStatus.FINISHED
+                winner = ""
+                redirectToLoss()
             }
 
 
             updateGameData(this)
 
         }
+    }
+
+    private fun redirectToPrize() {
+        val intentWinner = Intent(this, ResultActivity::class.java)
+        val intentLoser = Intent(this, NotResultActivity::class.java)
+
+        ticTacToeModel?.apply {
+            if (TicTacToeData.myID == winner) {
+                // Current player is the winner
+                startActivity(intentWinner)
+            } else {
+                // Current player is the loser
+                startActivity(intentLoser)
+            }
+            finish() // Close the current activity
+        }
+    }
+    private fun redirectToLoss() {
+        val intent = Intent(this, NotResultActivity::class.java)
+        startActivity(intent)
+        finish() // Close the current activity
     }
 
     override fun onClick(v: View?) {

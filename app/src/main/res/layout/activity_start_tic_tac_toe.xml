@@ -1,4 +1,11 @@
 <!-- activity_start_tic_tac_toe.xml -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".TicTacToeStart"
+    android:background="@color/grey">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -29,6 +36,19 @@
         android:letterSpacing="0.04"
         android:textColor="@color/green"/>
 
+    <Button
+        android:id="@+id/exit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Exit"
+        android:layout_marginTop="16dp"
+        android:visibility="gone" />
+    
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -213,7 +233,7 @@
             android:scrollbars="vertical" />
 
     </GridLayout>
-
+    </HorizontalScrollView>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -223,7 +243,7 @@
         android:id="@+id/start_game_button"/>
 
 </LinearLayout>
-
+</ScrollView>
 
 <!--    EditText editText1 = findViewById(R.id.editText1);-->
 

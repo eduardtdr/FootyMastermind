@@ -2,14 +2,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".TicTacToeStart"
+    tools:context=".GuessWhoStart"
     android:background="@color/grey">
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
-        tools:context=".TicTacToeStart"
+        tools:context=".GuessWhoStart"
         android:background="@color/grey">
 
         <TextView
@@ -52,7 +54,11 @@
             android:layout_marginTop="16dp"
             android:visibility="gone" />
 
-        <!-- GridLayout for images and names -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <!-- GridLayout for images and names -->
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -587,7 +593,7 @@
             <!-- Continue adding similar blocks until you have 15 items in total -->
 
         </GridLayout>
-
+    </HorizontalScrollView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
