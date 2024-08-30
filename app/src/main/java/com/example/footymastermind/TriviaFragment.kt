@@ -319,8 +319,17 @@ class TriviaFragment : Fragment() {
             val userUID = it.uid
             scoreRef.child("scores").child(userUID).child("correct").setValue(userCorrect)
             scoreRef.child("scores").child(userUID).child("wrong").setValue(userWrong).addOnSuccessListener {
-                Toast.makeText(activity, "Scores sent to database succesfully", Toast.LENGTH_SHORT).show()
-                val intent = Intent(requireActivity(), ResultActivity::class.java)
+                Toast.makeText(activity, "Scores sent to database successfully", Toast.LENGTH_SHORT).show()
+
+                // Redirect based on the number of correct answers
+                val nextActivity = if (userCorrect > 8) {
+                    ResultActivity::class.java
+                } else {
+                    NotResultActivity::class.java
+                }
+
+                // Start the chosen activity
+                val intent = Intent(requireActivity(), nextActivity)
                 startActivity(intent)
                 requireActivity().finish()
             }

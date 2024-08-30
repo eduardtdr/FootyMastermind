@@ -1,12 +1,13 @@
 package com.example.footymastermind
 
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import android.graphics.Color
+import androidx.fragment.app.Fragment
 import com.example.footymastermind.databinding.FragmentTenaballBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -16,7 +17,6 @@ import com.google.firebase.database.ValueEventListener
 import kotlin.random.Random
 
 // TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
@@ -31,8 +31,7 @@ class TenaballFragment : Fragment() {
     private var param2: String? = null
 
     lateinit var tenaballBinding: FragmentTenaballBinding
-    val database =
-        FirebaseDatabase.getInstance("https://footymastermindapp-default-rtdb.europe-west1.firebasedatabase.app/")
+    val database = FirebaseDatabase.getInstance("https://footymastermindapp-default-rtdb.europe-west1.firebasedatabase.app/")
     val databaseReference = database.reference.child("tenable")
     var question = ""
     var answer1 = ""
@@ -46,12 +45,12 @@ class TenaballFragment : Fragment() {
     var answer9 = ""
     var answer10 = ""
     var questionNumber = 0
+    var correctAnswerCount = 0
     var wrongAnswerCount = 0
     val maxWrongAttempts = 3
 
     val auth = FirebaseAuth.getInstance()
     val user = auth.currentUser
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,8 +71,7 @@ class TenaballFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        questionNumber = Random.nextInt(1, 1)
-        tenaballBinding.submitButton.setOnClickListener{
+        tenaballBinding.submitButton.setOnClickListener {
             checkAnswer()
         }
         questionNumber = Random.nextInt(1, 11)
@@ -84,8 +82,7 @@ class TenaballFragment : Fragment() {
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
-                question =
-                    snapshot.child(questionNumber.toString()).child("question").value.toString()
+                question = snapshot.child(questionNumber.toString()).child("question").value.toString()
                 answer1 = snapshot.child(questionNumber.toString()).child("1").value.toString()
                 answer2 = snapshot.child(questionNumber.toString()).child("2").value.toString()
                 answer3 = snapshot.child(questionNumber.toString()).child("3").value.toString()
@@ -112,21 +109,21 @@ class TenaballFragment : Fragment() {
                 tenaballBinding.progressBarTenable.visibility = View.INVISIBLE
                 tenaballBinding.responseLayout.visibility = View.VISIBLE
                 tenaballBinding.linearLayoutQuestion.visibility = View.VISIBLE
-
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(activity, error.message, Toast.LENGTH_SHORT).show()
             }
         })
-
     }
 
     private fun checkAnswer() {
         val userAnswer = tenaballBinding.textResponse.text.toString().trim()
         if (userAnswer.length < 4) {
             Toast.makeText(activity, "Answer should be at least 4 letters long", Toast.LENGTH_SHORT).show()
+            return
         }
+
         val correctAnswerIndex = (1..10).firstOrNull {
             val answer = when (it) {
                 1 -> answer1
@@ -143,8 +140,9 @@ class TenaballFragment : Fragment() {
             }
             answer.contains(userAnswer, ignoreCase = true)
         }
+
         if (correctAnswerIndex != null) {
-            // Change the color of the corresponding TextView
+            correctAnswerCount++
             val textView = when (correctAnswerIndex) {
                 1 -> tenaballBinding.textView1
                 2 -> tenaballBinding.textView2
@@ -178,8 +176,7 @@ class TenaballFragment : Fragment() {
         } else {
             wrongAnswerCount++
             if (wrongAnswerCount >= maxWrongAttempts) {
-                Toast.makeText(activity, "Game Over!", Toast.LENGTH_SHORT).show()
-                // final de joc
+                endGame()
             } else {
                 removeLife()
                 Toast.makeText(activity, "Incorrect Answer!", Toast.LENGTH_SHORT).show()
@@ -193,11 +190,23 @@ class TenaballFragment : Fragment() {
             2 -> tenaballBinding.lifeB.visibility = View.INVISIBLE
             3 -> {
                 tenaballBinding.lifeC.visibility = View.INVISIBLE
-                Toast.makeText(activity, "Game Over!", Toast.LENGTH_SHORT).show()
+                endGame()
             }
         }
     }
 
+    private fun endGame() {
+        if (correctAnswerCount >= 8) {
+            // Redirect to ResultActivity if correct answers are 8 or more
+            val intent = Intent(requireActivity(), ResultActivity::class.java)
+            startActivity(intent)
+        } else {
+            // Redirect to NotResultActivity otherwise
+            val intent = Intent(requireActivity(), NotResultActivity::class.java)
+            startActivity(intent)
+        }
+        requireActivity().finish()
+    }
 
     companion object {
         /**
@@ -206,9 +215,8 @@ class TenaballFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment SquadBuilderFragment.
+         * @return A new instance of fragment TenaballFragment.
          */
-// TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             TenaballFragment().apply {

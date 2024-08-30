@@ -1,71 +1,61 @@
 package com.example.footymastermind
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
-import com.bumptech.glide.request.transition.Transition
 import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.compose.ui.graphics.Color
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.example.footymastermind.databinding.FragmentDreamTeamBinding
-import com.example.footymastermind.databinding.FragmentTicTacToeBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DreamTeamFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DreamTeamFragment : Fragment() {
-    // Declare the selectedPlayers list to keep track of already selected players
+
     private val selectedPlayers = mutableListOf<String>()
-
-    private var param1: String? = null
-    private var param2: String? = null
-    // Declare the score variable
     private var score = 0
-
     lateinit var dreamTeamBinding: FragmentDreamTeamBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         dreamTeamBinding = FragmentDreamTeamBinding.inflate(inflater, container, false)
         return dreamTeamBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Set up the Exit button
+        dreamTeamBinding.exitButton.setOnClickListener {
+            // Redirect to MainActivity
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish() // Optional: Close the current activity
+        }
+
+        // Set up the Send Score button
+        dreamTeamBinding.sendScoreButton.setOnClickListener {
+            // Update score in Firebase
+            updateScoreInFirebase()
+        }
 
         dreamTeamBinding.configSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -121,10 +111,7 @@ class DreamTeamFragment : Fragment() {
                     showPromptAndUpdateButton(button, rowPositions, buttonLayout)
                 }
 
-                // Add button to the layout
                 buttonLayout.addView(button)
-
-                // Add the layout to the row
                 rowLayout.addView(buttonLayout)
             }
 
@@ -143,7 +130,6 @@ class DreamTeamFragment : Fragment() {
             }
         }
 
-        // Reset score when the formation changes
         score = 0
         updateScoreText()
     }
@@ -159,11 +145,9 @@ class DreamTeamFragment : Fragment() {
             return
         }
 
-        // Reference to the user's owned players in Firebase
         val database = FirebaseDatabase.getInstance("https://footymastermindapp-default-rtdb.europe-west1.firebasedatabase.app/")
         val databaseRef = database.reference.child("users/$userId/ownedPlayers")
 
-        // Fetch the owned players
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val players = mutableListOf<String>()
@@ -172,10 +156,8 @@ class DreamTeamFragment : Fragment() {
                     players.add(playerName!!)
                 }
 
-                // Filter out already selected players
                 val unselectedPlayers = players.filterNot { selectedPlayers.contains(it) }
 
-                // If there are no players left to select, show an appropriate message
                 if (unselectedPlayers.isEmpty()) {
                     AlertDialog.Builder(requireContext())
                         .setTitle("No Players Available")
@@ -185,26 +167,21 @@ class DreamTeamFragment : Fragment() {
                     return
                 }
 
-                // Create a dialog with the list of unselected players
                 val playerNamesArray = unselectedPlayers.toTypedArray()
                 AlertDialog.Builder(requireContext())
                     .setTitle("Select a Player")
                     .setItems(playerNamesArray) { dialog, which ->
                         val selectedPlayerName = playerNamesArray[which]
 
-                        // Add the selected player to the list of selected players
                         selectedPlayers.add(selectedPlayerName)
 
-                        // Fetch selected player details from Firebase
                         val selectedPlayerSnapshot = snapshot.child(selectedPlayerName)
 
                         val playerImage = selectedPlayerSnapshot.child("image").getValue(String::class.java)
                         val playerOverall = selectedPlayerSnapshot.child("overall").getValue(Int::class.java) ?: 0
 
-                        // Extract the last name of the player
                         val lastName = selectedPlayerName.split(" ").last()
 
-                        // Add points based on the overall and position match
                         var pointsToAdd = playerOverall
                         if (button.text == rowPosition) {
                             pointsToAdd += 10
@@ -212,8 +189,6 @@ class DreamTeamFragment : Fragment() {
                         score += pointsToAdd
                         updateScoreText()
 
-
-                        // Update button with player image
                         if (!playerImage.isNullOrEmpty()) {
                             Glide.with(requireContext())
                                 .load(playerImage)
@@ -223,12 +198,10 @@ class DreamTeamFragment : Fragment() {
                                     }
 
                                     override fun onLoadCleared(placeholder: Drawable?) {
-                                        // Handle cleanup if needed
                                     }
                                 })
                         }
 
-                        // Add a TextView below the button for the player's last name
                         val nameTextView = TextView(requireContext())
                         nameTextView.text = lastName
                         nameTextView.gravity = Gravity.CENTER
@@ -244,13 +217,34 @@ class DreamTeamFragment : Fragment() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Handle any errors
             }
         })
     }
 
     private fun updateScoreText() {
         dreamTeamBinding.scoreTextView.text = "Score: $score"
+    }
+
+    private fun updateScoreInFirebase() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId == null) {
+            return
+        }
+
+        val database = FirebaseDatabase.getInstance("https://footymastermindapp-default-rtdb.europe-west1.firebasedatabase.app/")
+        val scoresRef = database.reference.child("scores/$userId")
+
+        scoresRef.child("correct").setValue(score).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Toast.makeText(requireContext(), "Score updated successfully!", Toast.LENGTH_SHORT).show()
+                // Redirect to LeaderboardActivity
+                val intent = Intent(requireActivity(), LeaderboardActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish() // Optional: Close the current activity
+            } else {
+                Toast.makeText(requireContext(), "Failed to update score.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     companion object {
