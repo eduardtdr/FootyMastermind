@@ -19,7 +19,7 @@ public class Game_RecyclerViewAdapter extends RecyclerView.Adapter<Game_Recycler
     Context context;
     ArrayList<GameModel> gameModels;
 
-    public Game_RecyclerViewAdapter(Context context, ArrayList<GameModel> gameModels, RecyclerViewInterface recyclerViewInterface){
+    public Game_RecyclerViewAdapter(Context context, ArrayList<GameModel> gameModels, RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
         this.gameModels = gameModels;
         this.recyclerViewInterface = recyclerViewInterface;
@@ -45,10 +45,11 @@ public class Game_RecyclerViewAdapter extends RecyclerView.Adapter<Game_Recycler
         return gameModels.size();
     }
 
-    public static class MyViewHolder extends  RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
         TextView gameName, gameCategory;
+
         public MyViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView5);
@@ -58,9 +59,9 @@ public class Game_RecyclerViewAdapter extends RecyclerView.Adapter<Game_Recycler
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (recyclerViewInterface != null){
+                    if (recyclerViewInterface != null) {
                         int pos = getAdapterPosition();
-                        if(pos != RecyclerView.NO_POSITION) {
+                        if (pos != RecyclerView.NO_POSITION) {
                             recyclerViewInterface.onItemClick(pos);
                         }
                     }

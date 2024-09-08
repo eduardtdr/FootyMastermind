@@ -20,7 +20,8 @@ import com.google.firebase.database.ValueEventListener
 class LeaderboardActivity : AppCompatActivity() {
 
     private lateinit var leaderboardBinding: ActivityLeaderboardBinding
-    private val database = FirebaseDatabase.getInstance("https://footymastermindapp-default-rtdb.europe-west1.firebasedatabase.app/")
+    private val database =
+        FirebaseDatabase.getInstance("https://footymastermindapp-default-rtdb.europe-west1.firebasedatabase.app/")
     private val databaseReference = database.reference.child("scores")
     private val auth = FirebaseAuth.getInstance()
     private val user = auth.currentUser
@@ -36,10 +37,8 @@ class LeaderboardActivity : AppCompatActivity() {
         exitButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
 
-            // Start MainActivity
             startActivity(intent)
 
-            // Optionally, finish the current activity
             finish()
         }
     }
@@ -50,38 +49,53 @@ class LeaderboardActivity : AppCompatActivity() {
                 leaderboardBinding.leaderboardTable.removeAllViews()
                 val scrollView: ScrollView = findViewById(R.id.scroll_view)
 
-                // Header Row
                 val headerRow = TableRow(this@LeaderboardActivity)
+
                 val userIdHeader = TextView(this@LeaderboardActivity)
                 userIdHeader.text = "User ID"
-                userIdHeader.setPadding(8, 8, 8, 8)
-                headerRow.addView(userIdHeader)
+                userIdHeader.setPadding(16, 16, 16, 16)
+                headerRow.addView(
+                    userIdHeader,
+                    TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
+                )
 
                 val scoreHeader = TextView(this@LeaderboardActivity)
                 scoreHeader.text = "Score"
-                scoreHeader.setPadding(8, 8, 8, 8)
-                headerRow.addView(scoreHeader)
+                scoreHeader.setPadding(16, 16, 16, 16)
+                headerRow.addView(
+                    scoreHeader,
+                    TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
+                )
+
                 leaderboardBinding.leaderboardTable.addView(headerRow)
 
                 var currentUserRow: TableRow? = null
 
-                // Populate rows with data
                 for (userSnapshot in snapshot.children) {
-                    val userId = userSnapshot.key ?: continue
+                    val userId = userSnapshot.child("name").getValue(String::class.java) ?: continue
                     val score = userSnapshot.child("correct").getValue(Int::class.java) ?: 0
 
+                    val playerName = userId.substringBefore("@")
+
                     val row = TableRow(this@LeaderboardActivity)
+
                     val userIdTextView = TextView(this@LeaderboardActivity)
-                    userIdTextView.text = userId
-                    userIdTextView.setPadding(8, 8, 8, 8)
-                    row.addView(userIdTextView)
+                    userIdTextView.text = playerName
+                    userIdTextView.setPadding(16, 16, 16, 16) // Increased padding
+                    row.addView(
+                        userIdTextView,
+                        TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
+                    )
 
                     val scoreTextView = TextView(this@LeaderboardActivity)
                     scoreTextView.text = score.toString()
-                    scoreTextView.setPadding(8, 8, 8, 8)
-                    row.addView(scoreTextView)
+                    scoreTextView.setPadding(16, 16, 16, 16) // Increased padding
+                    row.addView(
+                        scoreTextView,
+                        TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
+                    )
 
-                    if (userId == user?.uid) {
+                    if (userId == (user?.email?.substringBefore("@") ?: "")) {
                         row.setBackgroundColor(Color.GREEN)
                         currentUserRow = row
                     }
@@ -89,7 +103,6 @@ class LeaderboardActivity : AppCompatActivity() {
                     leaderboardBinding.leaderboardTable.addView(row)
                 }
 
-                // Scroll to the current user's row if it exists
                 currentUserRow?.let {
                     scrollView.post {
                         scrollView.scrollTo(0, it.top - scrollView.height / 2 + it.height / 2)
@@ -98,7 +111,6 @@ class LeaderboardActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Handle possible errors
             }
         })
     }

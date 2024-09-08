@@ -1,160 +1,149 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ResultActivity">
 
-    <!-- ScrollView for scrolling content -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/grey">
 
-        <!-- Vertical LinearLayout to hold all the elements centered -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center_horizontal"
+            android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Congratulations Text -->
             <TextView
                 android:id="@+id/textViewCongratulations"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="16dp"
                 android:text="Congratulations, you won this player:"
                 android:textColor="@color/green"
-                android:textSize="24sp"
-                android:gravity="center"
-                android:paddingBottom="16dp"/>
+                android:textSize="24sp" />
 
-            <!-- ImageView -->
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
+                android:layout_gravity="center"
                 android:contentDescription="Result Image"
-                tools:srcCompat="@tools:sample/avatars"
-                android:layout_gravity="center"/>
+                tools:srcCompat="@tools:sample/avatars" />
 
-            <!-- Name Row -->
             <TextView
                 android:id="@+id/textViewName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="Name:"
                 android:textColor="@color/black"
-                android:textSize="24sp"
-                android:gravity="center"/>
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/editTextName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:gravity="center"
                 android:hint="Enter Name"
                 android:textColor="@color/green"
-                android:textSize="24sp"
-                android:gravity="center"/>
+                android:textSize="24sp" />
 
-            <!-- Nationality Row -->
             <TextView
                 android:id="@+id/textViewNationality"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:gravity="center"
                 android:text="Nationality:"
                 android:textColor="@color/black"
-                android:textSize="24sp"
-                android:gravity="center"/>
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/editTextNationality"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:gravity="center"
                 android:hint="Enter Nationality"
                 android:textColor="@color/green"
-                android:textSize="24sp"
-                android:gravity="center"/>
+                android:textSize="24sp" />
 
-            <!-- Overall Row -->
             <TextView
                 android:id="@+id/textViewOverall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:gravity="center"
                 android:text="Overall:"
                 android:textColor="@color/black"
-                android:textSize="24sp"
-                android:gravity="center"/>
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/editTextOverall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:gravity="center"
                 android:hint="Enter Overall"
                 android:textColor="@color/green"
-                android:textSize="24sp"
-                android:gravity="center"/>
+                android:textSize="24sp" />
 
-            <!-- Current Club Row -->
             <TextView
                 android:id="@+id/textViewClub"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:gravity="center"
                 android:text="Representative Club:"
                 android:textColor="@color/black"
-                android:textSize="24sp"
-                android:gravity="center"/>
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/editTextClub"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:gravity="center"
                 android:hint="Enter Current Club"
                 android:textColor="@color/green"
-                android:textSize="24sp"
-                android:gravity="center"/>
+                android:textSize="24sp" />
 
-            <!-- Position Row -->
             <TextView
                 android:id="@+id/textViewPosition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:gravity="center"
                 android:text="Position:"
                 android:textColor="@color/black"
-                android:textSize="24sp"
-                android:gravity="center"/>
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/editTextPosition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:gravity="center"
                 android:hint="Enter Current Position"
                 android:textColor="@color/green"
-                android:textSize="24sp"
-                android:gravity="center"/>
+                android:textSize="24sp" />
 
-            <!-- Exit Button -->
             <Button
                 android:id="@+id/buttonExit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:backgroundTint="@color/white"
+                android:gravity="center"
                 android:text="Exit"
                 android:textColor="@color/green"
-                android:textSize="16sp"
-                android:gravity="center"/>
+                android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

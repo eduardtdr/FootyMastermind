@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
 
     lateinit var googleSignInClient: GoogleSignInClient
 
-    lateinit var activityResultLauncher : ActivityResultLauncher<Intent>
+    lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +40,6 @@ class LoginActivity : AppCompatActivity() {
         textOfGoogleButton.setTextColor(Color.BLACK)
         textOfGoogleButton.textSize = 18F
 
-        //register
         registerActivityForGoogleSignIn()
 
         loginBinding.buttonSignin.setOnClickListener {
@@ -100,49 +99,52 @@ class LoginActivity : AppCompatActivity() {
             .requestIdToken("146291508962-snonvkqhsk5sr0k3e1f9fni57o48m54s.apps.googleusercontent.com")
             .requestEmail().build()
 
-        googleSignInClient = GoogleSignIn.getClient(this,gso)
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         signIn()
     }
 
     private fun signIn() {
-        val signInIntent : Intent = googleSignInClient.signInIntent
+        val signInIntent: Intent = googleSignInClient.signInIntent
         activityResultLauncher.launch(signInIntent)
     }
 
     private fun registerActivityForGoogleSignIn() {
 
-        activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),
-            ActivityResultCallback {result ->
-                val resultCode = result.resultCode
-                val data = result.data
+        activityResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult(),
+                ActivityResultCallback { result ->
+                    val resultCode = result.resultCode
+                    val data = result.data
 
-                if(resultCode == RESULT_OK && data != null){
-                    val task : Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
-                    firebaseSignInWithGoogle(task)
-                }
-            })
+                    if (resultCode == RESULT_OK && data != null) {
+                        val task: Task<GoogleSignInAccount> =
+                            GoogleSignIn.getSignedInAccountFromIntent(data)
+                        firebaseSignInWithGoogle(task)
+                    }
+                })
     }
 
-    private fun firebaseSignInWithGoogle(task : Task<GoogleSignInAccount>) {
+    private fun firebaseSignInWithGoogle(task: Task<GoogleSignInAccount>) {
         try {
-            val account : GoogleSignInAccount = task.getResult(ApiException::class.java)
-            Toast.makeText(applicationContext,"Welcome to Footy Mastermind",Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,MainActivity::class.java)
+            val account: GoogleSignInAccount = task.getResult(ApiException::class.java)
+            Toast.makeText(applicationContext, "Welcome to Footy Mastermind", Toast.LENGTH_SHORT)
+                .show()
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
             firebaseGoogleAccount(account)
-        }catch (e : ApiException) {
-            Toast.makeText(applicationContext,e.localizedMessage,Toast.LENGTH_SHORT).show()
+        } catch (e: ApiException) {
+            Toast.makeText(applicationContext, e.localizedMessage, Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun firebaseGoogleAccount(account: GoogleSignInAccount){
+    private fun firebaseGoogleAccount(account: GoogleSignInAccount) {
         val authCredential = GoogleAuthProvider.getCredential(account.idToken, null)
         auth.signInWithCredential(authCredential).addOnCompleteListener { task ->
-            if(task.isSuccessful){
+            if (task.isSuccessful) {
 
-            }else{
+            } else {
 
             }
         }

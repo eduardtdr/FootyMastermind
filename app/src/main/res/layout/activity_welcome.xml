@@ -10,54 +10,22 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:alpha="0.8"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:alpha="0.8"
         app:srcCompat="@drawable/back_image2" />
 
     <ImageView
         android:id="@+id/imageViewTop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitCenter"
         android:paddingHorizontal="15dp"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo1" />
-
-
-    <!--    <ImageView-->
-<!--        android:id="@+id/imageView"-->
-<!--        android:layout_width="400dp"-->
-<!--        android:layout_height="400dp"-->
-<!--        android:layout_marginTop="75dp"-->
-<!--        android:layout_marginBottom="75dp"-->
-<!--        android:scaleType="fitCenter"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/footyView"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:srcCompat="@drawable/start" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/footyView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="35dp"-->
-<!--        android:layout_marginTop="70dp"-->
-<!--        android:layout_marginEnd="35dp"-->
-<!--        android:layout_marginBottom="60dp"-->
-<!--        android:text="Footy Mastermind"-->
-<!--        android:textColor="#4CAF50"-->
-<!--        android:textColorHighlight="#4CAF50"-->
-<!--        android:textColorLink="#4CAF50"-->
-<!--        android:textSize="40sp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/imageView" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

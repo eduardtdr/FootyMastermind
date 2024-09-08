@@ -42,23 +42,24 @@ class GuessWhoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         guessWhoBinding = FragmentGuessWhoBinding.inflate(inflater, container, false)
-        return guessWhoBinding.root    }
+        return guessWhoBinding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        guessWhoBinding.playButton.setOnClickListener{
+        guessWhoBinding.playButton.setOnClickListener {
             createGame()
         }
 
-        guessWhoBinding.joinButton.setOnClickListener{
+        guessWhoBinding.joinButton.setOnClickListener {
             joinGame()
         }
     }
 
-    fun createGame(){
+    fun createGame() {
         GuessWhoData.myID = "Red"
         GuessWhoData.saveGuessWhoModel(
             GuessWhoModel(
@@ -69,26 +70,27 @@ class GuessWhoFragment : Fragment() {
         startGame()
     }
 
-    fun joinGame(){
+    fun joinGame() {
         var gameId = guessWhoBinding.gameIdInput.text.toString()
-        if(gameId.isEmpty()){
+        if (gameId.isEmpty()) {
             guessWhoBinding.gameIdInput.setError("Enter game ID")
             return
         }
         GuessWhoData.myID = "Green"
-        Firebase.firestore.collection("guess_who_games").document(gameId).get().addOnSuccessListener {
-            val model = it?.toObject(GuessWhoModel::class.java)
-            if(model==null){
-                guessWhoBinding.gameIdInput.setError("Enter valid game ID")
-            }else{
-                model.gameStatus = GuessGameStatus.JOINED
-                GuessWhoData.saveGuessWhoModel(model)
-                startGame()
+        Firebase.firestore.collection("guess_who_games").document(gameId).get()
+            .addOnSuccessListener {
+                val model = it?.toObject(GuessWhoModel::class.java)
+                if (model == null) {
+                    guessWhoBinding.gameIdInput.setError("Enter valid game ID")
+                } else {
+                    model.gameStatus = GuessGameStatus.JOINED
+                    GuessWhoData.saveGuessWhoModel(model)
+                    startGame()
+                }
             }
-        }
     }
 
-    fun startGame(){
+    fun startGame() {
         startActivity(Intent(requireActivity(), GuessWhoStart::class.java))
     }
 

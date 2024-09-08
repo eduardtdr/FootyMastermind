@@ -19,13 +19,6 @@ import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import kotlin.random.Random
 
-// eliminare buton de next si buton de finish
-// timp total nu per intrebare
-// la raspuns gresit se scad 5 secunde din timpul total
-// la raspuns corect se aduna 2 secunde la timpul total
-// dupa raspuns se asteapta 1 secunda pana sa se treaca la urmatoarea intrebare
-// la results sa afisez leaderboard
-
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -60,7 +53,7 @@ class TriviaFragment : Fragment() {
     var userCorrect = 0
     var userWrong = 0
 
-    lateinit var timer : CountDownTimer
+    lateinit var timer: CountDownTimer
     private val totalTime = 60000L
     var timerContinue = false
     var leftTime = totalTime
@@ -78,8 +71,6 @@ class TriviaFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
-//        triviaBinding = FragmentTriviaBinding.inflate(layoutInflater)
-
     }
 
 
@@ -87,7 +78,7 @@ class TriviaFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         triviaBinding = FragmentTriviaBinding.inflate(inflater, container, false)
         return triviaBinding.root
     }
@@ -96,10 +87,10 @@ class TriviaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         do {
-            val number = Random.nextInt(1,31)
+            val number = Random.nextInt(1, 31)
             Log.d("number", number.toString())
             questions.add(number)
-        }while(questions.size < 10)
+        } while (questions.size < 10)
 
 
         Log.d("numberOfQuestions", questions.toString())
@@ -198,13 +189,19 @@ class TriviaFragment : Fragment() {
                 if (questionNumber < questions.size) {
 
                     question =
-                        snapshot.child(questions.elementAt(questionNumber).toString()).child("question").value.toString()
-                    answerA = snapshot.child(questions.elementAt(questionNumber).toString()).child("a").value.toString()
-                    answerB = snapshot.child(questions.elementAt(questionNumber).toString()).child("b").value.toString()
-                    answerC = snapshot.child(questions.elementAt(questionNumber).toString()).child("c").value.toString()
-                    answerD = snapshot.child(questions.elementAt(questionNumber).toString()).child("d").value.toString()
+                        snapshot.child(questions.elementAt(questionNumber).toString())
+                            .child("question").value.toString()
+                    answerA = snapshot.child(questions.elementAt(questionNumber).toString())
+                        .child("a").value.toString()
+                    answerB = snapshot.child(questions.elementAt(questionNumber).toString())
+                        .child("b").value.toString()
+                    answerC = snapshot.child(questions.elementAt(questionNumber).toString())
+                        .child("c").value.toString()
+                    answerD = snapshot.child(questions.elementAt(questionNumber).toString())
+                        .child("d").value.toString()
                     correctAnswer =
-                        snapshot.child(questions.elementAt(questionNumber).toString()).child("answer").value.toString()
+                        snapshot.child(questions.elementAt(questionNumber).toString())
+                            .child("answer").value.toString()
 
                     triviaBinding.textViewQuestion.text = question
                     triviaBinding.textViewA.text = answerA
@@ -225,10 +222,10 @@ class TriviaFragment : Fragment() {
                     dialogMessage.setTitle("Trivia")
                     dialogMessage.setMessage("Game over!\nDo you want to see the results?")
                     dialogMessage.setCancelable(false)
-                    dialogMessage.setPositiveButton("See Result"){ dialogWindow,position ->
+                    dialogMessage.setPositiveButton("See Result") { dialogWindow, position ->
                         sendScore()
                     }
-                    dialogMessage.setNegativeButton("Play Again"){dialogWindow,position ->
+                    dialogMessage.setNegativeButton("Play Again") { dialogWindow, position ->
                         val intent = Intent(requireActivity(), TriviaFragment::class.java)
                         startActivity(intent)
                         requireActivity().finish()
@@ -249,7 +246,7 @@ class TriviaFragment : Fragment() {
     }
 
     fun findAnswer() {
-        when(correctAnswer){
+        when (correctAnswer) {
             "a" -> triviaBinding.textViewA.setBackgroundColor(Color.GREEN)
             "b" -> triviaBinding.textViewB.setBackgroundColor(Color.GREEN)
             "c" -> triviaBinding.textViewC.setBackgroundColor(Color.GREEN)
@@ -258,14 +255,14 @@ class TriviaFragment : Fragment() {
 
     }
 
-    fun disableClickableOfOptions(){
+    fun disableClickableOfOptions() {
         triviaBinding.textViewA.isClickable = false
         triviaBinding.textViewB.isClickable = false
         triviaBinding.textViewC.isClickable = false
         triviaBinding.textViewD.isClickable = false
     }
 
-    fun restoreOptions(){
+    fun restoreOptions() {
         triviaBinding.textViewA.setBackgroundColor(Color.WHITE)
         triviaBinding.textViewB.setBackgroundColor(Color.WHITE)
         triviaBinding.textViewC.setBackgroundColor(Color.WHITE)
@@ -277,8 +274,8 @@ class TriviaFragment : Fragment() {
         triviaBinding.textViewD.isClickable = true
     }
 
-    private fun startTimer(){
-        timer = object : CountDownTimer(leftTime, 1000){
+    private fun startTimer() {
+        timer = object : CountDownTimer(leftTime, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 leftTime = millisUntilFinished
                 updateCountDownText()
@@ -298,41 +295,45 @@ class TriviaFragment : Fragment() {
         timerContinue = true
     }
 
-    fun updateCountDownText(){
-        val remainingTime : Int = (leftTime/1000).toInt()
+    fun updateCountDownText() {
+        val remainingTime: Int = (leftTime / 1000).toInt()
         triviaBinding.textViewTime.text = remainingTime.toString()
     }
 
-    fun pauseTimer(){
+    fun pauseTimer() {
         timer.cancel()
         timerContinue = false
     }
 
-    fun resetTimer(){
+    fun resetTimer() {
         pauseTimer()
         leftTime = totalTime
         updateCountDownText()
     }
 
-    fun sendScore(){
+    fun sendScore() {
         user?.let {
             val userUID = it.uid
             scoreRef.child("scores").child(userUID).child("correct").setValue(userCorrect)
-            scoreRef.child("scores").child(userUID).child("wrong").setValue(userWrong).addOnSuccessListener {
-                Toast.makeText(activity, "Scores sent to database successfully", Toast.LENGTH_SHORT).show()
+            scoreRef.child("scores").child(userUID).child("wrong").setValue(userWrong)
+                .addOnSuccessListener {
+                    Toast.makeText(
+                        activity,
+                        "Scores sent to database successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-                // Redirect based on the number of correct answers
-                val nextActivity = if (userCorrect > 8) {
-                    ResultActivity::class.java
-                } else {
-                    NotResultActivity::class.java
+
+                    val nextActivity = if (userCorrect > 8) {
+                        ResultActivity::class.java
+                    } else {
+                        NotResultActivity::class.java
+                    }
+
+                    val intent = Intent(requireActivity(), nextActivity)
+                    startActivity(intent)
+                    requireActivity().finish()
                 }
-
-                // Start the chosen activity
-                val intent = Intent(requireActivity(), nextActivity)
-                startActivity(intent)
-                requireActivity().finish()
-            }
         }
     }
 

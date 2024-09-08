@@ -61,11 +61,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         navigationView.setNavigationItemSelectedListener(this)
 
-        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav)
+        val toggle = ActionBarDrawerToggle(
+            this,
+            drawerLayout,
+            toolbar,
+            R.string.open_nav,
+            R.string.close_nav
+        )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, HomeFragment()).commit()
             navigationView.setCheckedItem(R.id.nav_trivia)
@@ -73,19 +79,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.nav_home -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, HomeFragment()).commit()
+
             R.id.nav_tenaball -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, TenaballFragment()).commit()
+
             R.id.nav_dream_team -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, DreamTeamFragment()).commit()
+
             R.id.nav_tic_tac_toe -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, TicTacToeFragment()).commit()
+
             R.id.nav_guess -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, GuessWhoFragment()).commit()
+
             R.id.nav_trivia -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, TriviaFragment()).commit()
+
             R.id.nav_logout -> {
                 FirebaseAuth.getInstance().signOut()
                 val intent = Intent(this, LoginActivity::class.java)

@@ -31,7 +31,8 @@ class TenaballFragment : Fragment() {
     private var param2: String? = null
 
     lateinit var tenaballBinding: FragmentTenaballBinding
-    val database = FirebaseDatabase.getInstance("https://footymastermindapp-default-rtdb.europe-west1.firebasedatabase.app/")
+    val database =
+        FirebaseDatabase.getInstance("https://footymastermindapp-default-rtdb.europe-west1.firebasedatabase.app/")
     val databaseReference = database.reference.child("tenable")
     var question = ""
     var answer1 = ""
@@ -64,7 +65,7 @@ class TenaballFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         tenaballBinding = FragmentTenaballBinding.inflate(inflater, container, false)
         return tenaballBinding.root
     }
@@ -82,7 +83,8 @@ class TenaballFragment : Fragment() {
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
-                question = snapshot.child(questionNumber.toString()).child("question").value.toString()
+                question =
+                    snapshot.child(questionNumber.toString()).child("question").value.toString()
                 answer1 = snapshot.child(questionNumber.toString()).child("1").value.toString()
                 answer2 = snapshot.child(questionNumber.toString()).child("2").value.toString()
                 answer3 = snapshot.child(questionNumber.toString()).child("3").value.toString()
@@ -120,7 +122,8 @@ class TenaballFragment : Fragment() {
     private fun checkAnswer() {
         val userAnswer = tenaballBinding.textResponse.text.toString().trim()
         if (userAnswer.length < 4) {
-            Toast.makeText(activity, "Answer should be at least 4 letters long", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Answer should be at least 4 letters long", Toast.LENGTH_SHORT)
+                .show()
             return
         }
 
@@ -182,6 +185,7 @@ class TenaballFragment : Fragment() {
                 Toast.makeText(activity, "Incorrect Answer!", Toast.LENGTH_SHORT).show()
             }
         }
+        tenaballBinding.textResponse.text.clear()
     }
 
     private fun removeLife() {
@@ -197,11 +201,11 @@ class TenaballFragment : Fragment() {
 
     private fun endGame() {
         if (correctAnswerCount >= 8) {
-            // Redirect to ResultActivity if correct answers are 8 or more
+
             val intent = Intent(requireActivity(), ResultActivity::class.java)
             startActivity(intent)
         } else {
-            // Redirect to NotResultActivity otherwise
+
             val intent = Intent(requireActivity(), NotResultActivity::class.java)
             startActivity(intent)
         }

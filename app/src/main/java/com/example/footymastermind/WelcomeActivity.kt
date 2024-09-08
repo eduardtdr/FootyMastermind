@@ -24,9 +24,9 @@ class WelcomeActivity : AppCompatActivity() {
 
         val handler = Handler(Looper.getMainLooper())
 
-        handler.postDelayed(object : Runnable{
+        handler.postDelayed(object : Runnable {
             override fun run() {
-                val intent = Intent(this@WelcomeActivity,LoginActivity::class.java)
+                val intent = Intent(this@WelcomeActivity, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
             }

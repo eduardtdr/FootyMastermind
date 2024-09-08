@@ -16,7 +16,7 @@ import java.util.ArrayList
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-interface RecyclerViewInterface{
+interface RecyclerViewInterface {
     fun onItemClick(position: Int)
 }
 
@@ -25,7 +25,7 @@ interface RecyclerViewInterface{
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeFragment : Fragment(), RecyclerViewInterface{
+class HomeFragment : Fragment(), RecyclerViewInterface {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -48,7 +48,7 @@ class HomeFragment : Fragment(), RecyclerViewInterface{
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        homeBinding = FragmentHomeBinding.inflate(inflater, container,false)
+        homeBinding = FragmentHomeBinding.inflate(inflater, container, false)
         return homeBinding.root
     }
 
@@ -67,11 +67,46 @@ class HomeFragment : Fragment(), RecyclerViewInterface{
     }
 
     private fun setUpGameModels() {
-        gameModels.add(GameModel(getString(R.string.guess_who), getString(R.string.multiplayer_games), getString(R.string.guess_who_description),R.drawable.baseline_psychology_alt_24))
-        gameModels.add(GameModel(getString(R.string.tic_tac_toe), getString(R.string.multiplayer_games), getString(R.string.tic_tac_toe_description),R.drawable.baseline_handshake_24))
-        gameModels.add(GameModel(getString(R.string.football_trivia), getString(R.string.single_player_games), getString(R.string.football_trivia_description),R.drawable.baseline_timer_24))
-        gameModels.add(GameModel(getString(R.string.tenaball), getString(R.string.single_player_games), getString(R.string.tenaball_description),R.drawable.sharp_keyboard_capslock_24))
-        gameModels.add(GameModel(getString(R.string.dream_team), getString(R.string.single_player_games), getString(R.string.dream_team_description),R.drawable.baseline_local_fire_department_24))
+        gameModels.add(
+            GameModel(
+                getString(R.string.guess_who),
+                getString(R.string.multiplayer_games),
+                getString(R.string.guess_who_description),
+                R.drawable.baseline_psychology_alt_24
+            )
+        )
+        gameModels.add(
+            GameModel(
+                getString(R.string.tic_tac_toe),
+                getString(R.string.multiplayer_games),
+                getString(R.string.tic_tac_toe_description),
+                R.drawable.baseline_handshake_24
+            )
+        )
+        gameModels.add(
+            GameModel(
+                getString(R.string.football_trivia),
+                getString(R.string.single_player_games),
+                getString(R.string.football_trivia_description),
+                R.drawable.baseline_timer_24
+            )
+        )
+        gameModels.add(
+            GameModel(
+                getString(R.string.tenaball),
+                getString(R.string.single_player_games),
+                getString(R.string.tenaball_description),
+                R.drawable.sharp_keyboard_capslock_24
+            )
+        )
+        gameModels.add(
+            GameModel(
+                getString(R.string.dream_team),
+                getString(R.string.single_player_games),
+                getString(R.string.dream_team_description),
+                R.drawable.baseline_local_fire_department_24
+            )
+        )
     }
 
     companion object {
@@ -101,6 +136,5 @@ class HomeFragment : Fragment(), RecyclerViewInterface{
         intent.putExtra("DESCRIPTION", gameModels.get(position).getGameDescription())
         intent.putExtra("IMAGE", gameModels.get(position).getImage())
         startActivity(intent)
-//        requireActivity().finish()
     }
 }

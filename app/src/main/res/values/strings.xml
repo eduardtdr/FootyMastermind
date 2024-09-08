@@ -6,24 +6,43 @@
     <string name="open_nav">Open Navigation Drawer</string>
     <string name="close_nav">Close Navigation Drawer</string>
     <string name="guess_who">Guess Who</string>
-    <string name="guess_who_description">Guess Who</string>
+    <string name="guess_who_description">To get started, either create a new game code or join a session with the code provided by your friend.
+    In this game, both players will see 15 faces and names.
+    Each of you will have a secret target player.
+    Take turns asking yes/no questions to narrow down the list.
+    When you are confident about your guess, type in the full name of your target player to make your guess.
+    You can also mark off players you’ve ruled out—don’t worry, you can unmark them if you change your mind.
+    The game ends when one of you successfully guesses the other’s target player.
+    Ready to test your deduction skills and have fun? Let’s play!</string>
     <string name="trivia">Trivia</string>
     <string name="dream_team">Dream Team</string>
-    <string name="dream_team_description">Dream Team</string>
+    <string name="dream_team_description">Remember the prizes that you get after a great performance on all the other games?
+    Select your football formation and fill each position using those players that you’ve earned.
+    Each player has unique qualities, and you’ll earn bonus points by placing them in the positions they play in real life.
+    Complete your squad and submit your score to see how you rank on the leaderboards.
+    Ready to build your ultimate team and climb to the top? Let’s get started!</string>
     <string name="football_trivia">Football Trivia</string>
-    <string name="football_trivia_description">Are you ready to put your football knowledge to the test?
-    Try to answer correctly to as many questions as possible within the time limit.
-    Every right answer will get you bonus time as well as points, so the more you know, the longer you will stay in the game.
-    However, wrong answers will cause time drains.
-
-    Check out where you sit in the leaderboard at the end! To start the game, select it from the left sliding menu.
+    <string name="football_trivia_description">Test your knowledge with 10 random trivia questions, each featuring 4 possible answers.
+    You’ll have a timer for each question that resets when you move to the next one.
+    Answer correctly to increase your score; incorrect answers will show up in red while the correct answer turns green.
+    Get more than 8 questions right to win an awesome prize! Ready to challenge yourself and have fun? Let’s go!
 </string>
     <string name="tic_tac_toe">Tic Tac Toe</string>
-    <string name="tic_tac_toe_description">Tic Tac Toe</string>
+    <string name="tic_tac_toe_description">Start by creating or joining a game with a code.
+    This classic game gets a twist: the first row lists countries, and the first column features football clubs.
+    To make your move, type in the name of a player who fits both the country and the club criteria for the box you select.
+    You have a limited time per turn—exceed it and the turn passes to the other player. The game ends as a draw if 20 turns are reached.
+    Ready to test your football knowledge and strategy? Let’s play!</string>
     <string name="logout">Logout</string>
     <string name="home">Home</string>
     <string name="tenaball">Tenaball</string>
-    <string name="tenaball_description">Tenaball</string>
+    <string name="tenaball_description">In this exciting game, you’ll tackle a random question with 10 possible correct answers.
+    You start with 3 lives: get an answer wrong, and you lose one.
+    Type in half of a name or use lowercase letters; if it is close enough, you will still get credit, but the full answer is always the best bet.
+    Answer 8 or more questions correctly to win a fantastic prize!
+    Run out of lives and the game ends. Ready to play?
+    Let’s see how many correct answers you can rack up!
+    </string>
     <string name="multiplayer_games">Multiplayer Games</string>
     <string name="single_player_games">Single Player Games</string>
     <!-- TODO: Remove or change this placeholder text -->

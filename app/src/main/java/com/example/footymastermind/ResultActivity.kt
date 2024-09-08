@@ -18,7 +18,8 @@ class ResultActivity : AppCompatActivity() {
 
     lateinit var resultBinding: ActivityResultBinding
 
-    private val database = FirebaseDatabase.getInstance("https://footymastermindapp-default-rtdb.europe-west1.firebasedatabase.app/")
+    private val database =
+        FirebaseDatabase.getInstance("https://footymastermindapp-default-rtdb.europe-west1.firebasedatabase.app/")
     private val databaseReference = database.reference.child("players")
 
     private val auth = FirebaseAuth.getInstance()
@@ -50,10 +51,8 @@ class ResultActivity : AppCompatActivity() {
                     val randomPlayerKey = playerKeys[Random.nextInt(playerKeys.size)]
                     val playerSnapshot = snapshot.child(randomPlayerKey)
 
-                    // Update the UI with player data
                     updateUIWithPlayerData(playerSnapshot)
 
-                    // Update user-owned players in the database
                     if (user != null) {
                         updateUserOwnedPlayers(randomPlayerKey, playerSnapshot)
                     } else {
@@ -72,11 +71,14 @@ class ResultActivity : AppCompatActivity() {
 
     private fun updateUIWithPlayerData(playerSnapshot: DataSnapshot) {
         val playerName = playerSnapshot.key ?: "Unknown Player"
-        val playerCountry = playerSnapshot.child("country").getValue(String::class.java) ?: "Unknown Country"
-        val playerCurrentClub = playerSnapshot.child("current club").getValue(String::class.java) ?: "Unknown Club"
+        val playerCountry =
+            playerSnapshot.child("country").getValue(String::class.java) ?: "Unknown Country"
+        val playerCurrentClub =
+            playerSnapshot.child("current club").getValue(String::class.java) ?: "Unknown Club"
         val playerImage = playerSnapshot.child("image").getValue(String::class.java) ?: ""
         val playerOverall = playerSnapshot.child("overall").getValue(Int::class.java) ?: 0
-        val playerPosition = playerSnapshot.child("position").getValue(String::class.java) ?: "Unknown Position"
+        val playerPosition =
+            playerSnapshot.child("position").getValue(String::class.java) ?: "Unknown Position"
 
         resultBinding.editTextName.text = playerName
         resultBinding.editTextClub.text = playerCurrentClub
@@ -94,22 +96,28 @@ class ResultActivity : AppCompatActivity() {
     private fun ensureUserExists() {
         user?.let {
             val userUID = it.uid
-            val userReference = FirebaseDatabase.getInstance().reference.child("users").child(userUID)
+            val userReference =
+                FirebaseDatabase.getInstance().reference.child("users").child(userUID)
 
             userReference.get().addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     if (!task.result.exists()) {
-                        userReference.setValue(mapOf(
-                            "email" to it.email,
-                            "owned_players" to emptyList<String>()
-                        )).addOnSuccessListener {
+                        userReference.setValue(
+                            mapOf(
+                                "email" to it.email,
+                                "owned_players" to emptyList<String>()
+                            )
+                        ).addOnSuccessListener {
                             Log.d("ResultActivity", "User node created successfully.")
                         }.addOnFailureListener { e ->
                             Log.e("ResultActivity", "Failed to create user node: ${e.message}")
                         }
                     }
                 } else {
-                    Log.e("ResultActivity", "Failed to check user existence: ${task.exception?.message}")
+                    Log.e(
+                        "ResultActivity",
+                        "Failed to check user existence: ${task.exception?.message}"
+                    )
                 }
             }
         }
@@ -118,25 +126,29 @@ class ResultActivity : AppCompatActivity() {
     private fun updateUserOwnedPlayers(playerKey: String, playerSnapshot: DataSnapshot) {
         val userId = user?.uid ?: return
 
-        // Create a map for the player data
         val playerData = mapOf(
             "name" to (playerSnapshot.key ?: "Unknown Player"),
-            "country" to (playerSnapshot.child("country").getValue(String::class.java) ?: "Unknown Country"),
-            "currentClub" to (playerSnapshot.child("current club").getValue(String::class.java) ?: "Unknown Club"),
+            "country" to (playerSnapshot.child("country").getValue(String::class.java)
+                ?: "Unknown Country"),
+            "currentClub" to (playerSnapshot.child("current club").getValue(String::class.java)
+                ?: "Unknown Club"),
             "image" to (playerSnapshot.child("image").getValue(String::class.java) ?: ""),
             "overall" to (playerSnapshot.child("overall").getValue(Int::class.java) ?: 0),
-            "position" to (playerSnapshot.child("position").getValue(String::class.java) ?: "Unknown Position")
+            "position" to (playerSnapshot.child("position").getValue(String::class.java)
+                ?: "Unknown Position")
         )
 
-        // Reference to the user's data in the database
-        val userReference = database.reference.child("users").child(userId).child("ownedPlayers").child(playerKey)
+        val userReference =
+            database.reference.child("users").child(userId).child("ownedPlayers").child(playerKey)
 
-        // Update the database with player data
         userReference.setValue(playerData).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Log.d("ResultActivity", "Player added to user's owned players.")
             } else {
-                Log.e("ResultActivity", "Failed to add player to user's owned players: ${task.exception?.message}")
+                Log.e(
+                    "ResultActivity",
+                    "Failed to add player to user's owned players: ${task.exception?.message}"
+                )
             }
         }
     }

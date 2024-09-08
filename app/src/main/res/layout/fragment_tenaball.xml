@@ -214,13 +214,14 @@
             android:text=""
             android:textColor="@color/green"
             android:textSize="25sp" />
+
         <Button
             android:id="@+id/submit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
             android:background="@color/green"
-            android:text="Submit" />
+            android:text="Submit"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

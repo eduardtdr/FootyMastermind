@@ -10,12 +10,10 @@ class NotResultActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Inflate the correct binding for activity_not_result.xml
         notResultBinding = ActivityNotResultBinding.inflate(layoutInflater)
         val view = notResultBinding.root
         setContentView(view)
 
-        // Handle Exit button click
         notResultBinding.buttonExit.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("fragment_to_load", R.id.nav_home)

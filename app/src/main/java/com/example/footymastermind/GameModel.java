@@ -1,5 +1,7 @@
 package com.example.footymastermind;
+
 import java.lang.String;
+
 public class GameModel {
     String gameName;
     String gameCategory;
@@ -21,9 +23,11 @@ public class GameModel {
     public String getGameCategory() {
         return gameCategory;
     }
+
     public String getGameDescription() {
         return gameDescription;
     }
+
     public int getImage() {
         return image;
     }

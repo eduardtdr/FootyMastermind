@@ -43,29 +43,45 @@ class DreamTeamFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set up the Exit button
+
         dreamTeamBinding.exitButton.setOnClickListener {
-            // Redirect to MainActivity
+
             val intent = Intent(requireContext(), MainActivity::class.java)
             startActivity(intent)
-            requireActivity().finish() // Optional: Close the current activity
+            requireActivity().finish()
         }
 
-        // Set up the Send Score button
+
         dreamTeamBinding.sendScoreButton.setOnClickListener {
-            // Update score in Firebase
-            updateScoreInFirebase()
+            val userEmail = FirebaseAuth.getInstance().currentUser?.email
+            if (userEmail != null) {
+
+                val playerName = userEmail.substringBefore("@")
+                updateScoreInFirebase(playerName)
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Failed to retrieve user email",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
-        dreamTeamBinding.configSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                displayButtonsBasedOnSelection()
-            }
+        dreamTeamBinding.configSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    displayButtonsBasedOnSelection()
+                }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Do nothing
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
             }
-        }
     }
 
     private fun displayButtonsBasedOnSelection() {
@@ -139,13 +155,18 @@ class DreamTeamFragment : Fragment() {
         return (dp * scale + 0.5f).toInt()
     }
 
-    private fun showPromptAndUpdateButton(button: Button, rowPosition: String, buttonLayout: LinearLayout) {
+    private fun showPromptAndUpdateButton(
+        button: Button,
+        rowPosition: String,
+        buttonLayout: LinearLayout
+    ) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId == null) {
             return
         }
 
-        val database = FirebaseDatabase.getInstance("https://footymastermindapp-default-rtdb.europe-west1.firebasedatabase.app/")
+        val database =
+            FirebaseDatabase.getInstance("https://footymastermindapp-default-rtdb.europe-west1.firebasedatabase.app/")
         val databaseRef = database.reference.child("users/$userId/ownedPlayers")
 
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -177,8 +198,10 @@ class DreamTeamFragment : Fragment() {
 
                         val selectedPlayerSnapshot = snapshot.child(selectedPlayerName)
 
-                        val playerImage = selectedPlayerSnapshot.child("image").getValue(String::class.java)
-                        val playerOverall = selectedPlayerSnapshot.child("overall").getValue(Int::class.java) ?: 0
+                        val playerImage =
+                            selectedPlayerSnapshot.child("image").getValue(String::class.java)
+                        val playerOverall =
+                            selectedPlayerSnapshot.child("overall").getValue(Int::class.java) ?: 0
 
                         val lastName = selectedPlayerName.split(" ").last()
 
@@ -193,7 +216,10 @@ class DreamTeamFragment : Fragment() {
                             Glide.with(requireContext())
                                 .load(playerImage)
                                 .into(object : CustomTarget<Drawable>() {
-                                    override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
+                                    override fun onResourceReady(
+                                        resource: Drawable,
+                                        transition: Transition<in Drawable>?
+                                    ) {
                                         button.background = resource
                                     }
 
@@ -225,24 +251,32 @@ class DreamTeamFragment : Fragment() {
         dreamTeamBinding.scoreTextView.text = "Score: $score"
     }
 
-    private fun updateScoreInFirebase() {
+    private fun updateScoreInFirebase(playerName: String) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId == null) {
             return
         }
 
-        val database = FirebaseDatabase.getInstance("https://footymastermindapp-default-rtdb.europe-west1.firebasedatabase.app/")
+        val database =
+            FirebaseDatabase.getInstance("https://footymastermindapp-default-rtdb.europe-west1.firebasedatabase.app/")
         val scoresRef = database.reference.child("scores/$userId")
 
-        scoresRef.child("correct").setValue(score).addOnCompleteListener { task ->
+        val scoreData = mapOf(
+            "name" to playerName,
+            "correct" to score
+        )
+
+        scoresRef.setValue(scoreData).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                Toast.makeText(requireContext(), "Score updated successfully!", Toast.LENGTH_SHORT).show()
-                // Redirect to LeaderboardActivity
+                Toast.makeText(requireContext(), "Score updated successfully!", Toast.LENGTH_SHORT)
+                    .show()
+
                 val intent = Intent(requireActivity(), LeaderboardActivity::class.java)
                 startActivity(intent)
-                requireActivity().finish() // Optional: Close the current activity
+                requireActivity().finish()
             } else {
-                Toast.makeText(requireContext(), "Failed to update score.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Failed to update score.", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }

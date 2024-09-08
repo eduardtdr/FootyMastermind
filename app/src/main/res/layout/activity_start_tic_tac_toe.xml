@@ -1,269 +1,250 @@
 <!-- activity_start_tic_tac_toe.xml -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".TicTacToeStart"
-    android:background="@color/grey">
+    android:background="@color/grey"
+    tools:context=".TicTacToeStart">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    tools:context=".TicTacToeStart"
-    android:background="@color/grey">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tic_tac_toe"
-        android:textStyle="bold"
-        android:textSize="28sp"
-        android:layout_margin="8dp"
-        android:layout_gravity="center"
-        android:padding="8dp"/>
-
-    <TextView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/game_status_text"
-        android:text="@string/game_not_started"
-        android:textStyle="bold"
-        android:textSize="32sp"
-        android:layout_margin="50dp"
-        android:layout_gravity="center"
-        android:letterSpacing="0.04"
-        android:textColor="@color/green"/>
-
-    <Button
-        android:id="@+id/exit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Exit"
-        android:layout_marginTop="16dp"
-        android:visibility="gone" />
-    
-    <HorizontalScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fillViewport="true">
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:alignmentMode="alignMargins"
-        android:columnOrderPreserved="false"
-        android:useDefaultMargins="true"
-        android:layout_margin="16dp"
-        android:padding="8dp"
-        android:layout_marginStart="20dp"
-        android:columnCount="4"
-        android:rowCount="4">
+        android:layout_height="match_parent"
+        android:background="@color/grey"
+        android:orientation="vertical"
+        tools:context=".TicTacToeStart">
 
         <TextView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@drawable/baseline_sports_soccer_24"
-            android:gravity="center"
-            android:inputType="textMultiLine"
-            android:scrollbars="vertical"
-            android:importantForAccessibility="no"
-            android:id="@+id/gr_11"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:text="@string/tic_tac_toe"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@color/white"
-            android:gravity="center"
-            android:hint="Column  1"
-            android:inputType="textMultiLine"
-            android:id="@+id/gr_12"
-            android:scrollbars="vertical" />
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@color/white"
-            android:gravity="center"
-            android:text=""
-            android:hint="Column  2"
-            android:inputType="textMultiLine"
-            android:id="@+id/gr_13"
-            android:scrollbars="vertical" />
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@color/white"
-            android:gravity="center"
-            android:hint="Column  3"
-            android:inputType="textMultiLine"
-            android:id="@+id/gr_14"
-            android:scrollbars="vertical" />
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@color/white"
-            android:gravity="center"
-            android:hint="Row 1"
-            android:inputType="textMultiLine"
-            android:id="@+id/gr_21"
-            android:scrollbars="vertical" />
+            android:id="@+id/game_status_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="50dp"
+            android:letterSpacing="0.04"
+            android:text="@string/game_not_started"
+            android:textColor="@color/green"
+            android:textSize="32sp"
+            android:textStyle="bold" />
 
         <Button
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:backgroundTint="@color/white"
-            android:gravity="center"
-            android:hint="Type player name"
-            android:inputType="textMultiLine"
-            android:id="@+id/gr_22"
-            android:tag="0"
-            android:scrollbars="vertical" />
+            android:id="@+id/exit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="Exit"
+            android:visibility="gone" />
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="16dp"
+                android:layout_marginStart="20dp"
+                android:alignmentMode="alignMargins"
+                android:columnCount="4"
+                android:columnOrderPreserved="false"
+                android:padding="8dp"
+                android:rowCount="4"
+                android:useDefaultMargins="true">
+
+                <TextView
+                    android:id="@+id/gr_11"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/baseline_sports_soccer_24"
+                    android:gravity="center"
+                    android:importantForAccessibility="no"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical" />
+
+                <TextView
+                    android:id="@+id/gr_12"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:hint="Column  1"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical" />
+
+                <TextView
+                    android:id="@+id/gr_13"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:hint="Column  2"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/gr_14"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:hint="Column  3"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical" />
+
+                <TextView
+                    android:id="@+id/gr_21"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:hint="Row 1"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical" />
+
+                <Button
+                    android:id="@+id/gr_22"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:backgroundTint="@color/white"
+                    android:gravity="center"
+                    android:hint="Type player name"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:tag="0" />
+
+                <Button
+                    android:id="@+id/gr_23"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:backgroundTint="@color/white"
+                    android:gravity="center"
+                    android:hint="Type player name"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:tag="1" />
+
+                <Button
+                    android:id="@+id/gr_24"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:backgroundTint="@color/white"
+                    android:gravity="center"
+                    android:hint="Type player name"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:tag="2" />
+
+                <TextView
+                    android:id="@+id/gr_31"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:hint="Row 2"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical" />
+
+                <Button
+                    android:id="@+id/gr_32"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:backgroundTint="@color/white"
+                    android:gravity="center"
+                    android:hint="Type player name"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:tag="3" />
+
+                <Button
+                    android:id="@+id/gr_33"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:backgroundTint="@color/white"
+                    android:gravity="center"
+                    android:hint="Type player name"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:tag="4" />
+
+                <Button
+                    android:id="@+id/gr_34"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:backgroundTint="@color/white"
+                    android:gravity="center"
+                    android:hint="Type player name"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:tag="5" />
+
+                <TextView
+                    android:id="@+id/gr_41"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:hint="Row 3"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical" />
+
+                <Button
+                    android:id="@+id/gr_42"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:backgroundTint="@color/white"
+                    android:gravity="center"
+                    android:hint="Type player name"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:tag="6" />
+
+                <Button
+                    android:id="@+id/gr_43"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:backgroundTint="@color/white"
+                    android:gravity="center"
+                    android:hint="Type player name"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:tag="7" />
+
+                <Button
+                    android:id="@+id/gr_44"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:backgroundTint="@color/white"
+                    android:gravity="center"
+                    android:hint="Type player name"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:tag="8" />
+
+            </GridLayout>
+        </HorizontalScrollView>
 
         <Button
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:gravity="center"
-            android:inputType="textMultiLine"
-            android:backgroundTint="@color/white"
-            android:hint="Type player name"
-            android:id="@+id/gr_23"
-            android:tag="1"
-            android:scrollbars="vertical" />
+            android:id="@+id/start_game_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:text="Start game" />
 
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:backgroundTint="@color/white"
-            android:gravity="center"
-            android:hint="Type player name"
-            android:inputType="textMultiLine"
-            android:id="@+id/gr_24"
-            android:tag="2"
-            android:scrollbars="vertical" />
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@color/white"
-            android:gravity="center"
-            android:hint="Row 2"
-            android:inputType="textMultiLine"
-            android:id="@+id/gr_31"
-            android:scrollbars="vertical" />
-
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:backgroundTint="@color/white"
-            android:gravity="center"
-            android:hint="Type player name"
-            android:inputType="textMultiLine"
-            android:id="@+id/gr_32"
-            android:tag="3"
-            android:scrollbars="vertical" />
-
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:gravity="center"
-            android:backgroundTint="@color/white"
-            android:hint="Type player name"
-            android:inputType="textMultiLine"
-            android:id="@+id/gr_33"
-            android:tag="4"
-            android:scrollbars="vertical" />
-
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:backgroundTint="@color/white"
-            android:gravity="center"
-            android:hint="Type player name"
-            android:inputType="textMultiLine"
-            android:id="@+id/gr_34"
-            android:tag="5"
-            android:scrollbars="vertical" />
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@color/white"
-            android:gravity="center"
-            android:hint="Row 3"
-            android:inputType="textMultiLine"
-            android:id="@+id/gr_41"
-            android:scrollbars="vertical" />
-
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:backgroundTint="@color/white"
-            android:gravity="center"
-            android:hint="Type player name"
-            android:inputType="textMultiLine"
-            android:id="@+id/gr_42"
-            android:tag="6"
-            android:scrollbars="vertical" />
-
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:backgroundTint="@color/white"
-            android:gravity="center"
-            android:hint="Type player name"
-            android:inputType="textMultiLine"
-            android:id="@+id/gr_43"
-            android:tag="7"
-            android:scrollbars="vertical" />
-
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:backgroundTint="@color/white"
-            android:gravity="center"
-            android:hint="Type player name"
-            android:inputType="textMultiLine"
-            android:id="@+id/gr_44"
-            android:tag="8"
-            android:scrollbars="vertical" />
-
-    </GridLayout>
-    </HorizontalScrollView>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:text="Start game"
-        android:id="@+id/start_game_button"/>
-
-</LinearLayout>
+    </LinearLayout>
 </ScrollView>
-
-<!--    EditText editText1 = findViewById(R.id.editText1);-->
-
-<!--    editText1.addTextChangedListener(new TextWatcher() {-->
-<!--    @Override-->
-<!--    public void beforeTextChanged(CharSequence s, int start, int count, int after) {-->
-<!--    // Not needed for this example-->
-<!--    }-->
-
-<!--    @Override-->
-<!--    public void onTextChanged(CharSequence s, int start, int before, int count) {-->
-<!--    // Handle changes in the text-->
-<!--    String playerName = s.toString();-->
-<!--    // Update your game logic accordingly, e.g., store the player's name in your data structure-->
-<!--    }-->
-
-<!--    @Override-->
-<!--    public void afterTextChanged(Editable s) {-->
-<!--    // Not needed for this example-->
-<!--    }-->
-<!--    });-->
 
 

@@ -42,7 +42,6 @@ class TicTacToeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         ticTacToeBinding = FragmentTicTacToeBinding.inflate(inflater, container, false)
         return ticTacToeBinding.root
     }
@@ -50,16 +49,16 @@ class TicTacToeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ticTacToeBinding.playButton.setOnClickListener{
+        ticTacToeBinding.playButton.setOnClickListener {
             createGame()
         }
 
-        ticTacToeBinding.joinButton.setOnClickListener{
+        ticTacToeBinding.joinButton.setOnClickListener {
             joinGame()
         }
     }
 
-    fun createGame(){
+    fun createGame() {
         TicTacToeData.myID = "Red"
         TicTacToeData.saveTicTacToeModel(
             TicTacToeModel(
@@ -70,26 +69,27 @@ class TicTacToeFragment : Fragment() {
         startGame()
     }
 
-    fun joinGame(){
+    fun joinGame() {
         var gameId = ticTacToeBinding.gameIdInput.text.toString()
-        if(gameId.isEmpty()){
+        if (gameId.isEmpty()) {
             ticTacToeBinding.gameIdInput.setError("Enter game ID")
             return
         }
         TicTacToeData.myID = "Green"
-        Firebase.firestore.collection("tic_tac_toe_games").document(gameId).get().addOnSuccessListener {
-            val model = it?.toObject(TicTacToeModel::class.java)
-            if(model==null){
-                ticTacToeBinding.gameIdInput.setError("Enter valid game ID")
-            }else{
-                model.gameStatus = GameStatus.JOINED
-                TicTacToeData.saveTicTacToeModel(model)
-                startGame()
+        Firebase.firestore.collection("tic_tac_toe_games").document(gameId).get()
+            .addOnSuccessListener {
+                val model = it?.toObject(TicTacToeModel::class.java)
+                if (model == null) {
+                    ticTacToeBinding.gameIdInput.setError("Enter valid game ID")
+                } else {
+                    model.gameStatus = GameStatus.JOINED
+                    TicTacToeData.saveTicTacToeModel(model)
+                    startGame()
+                }
             }
-        }
     }
 
-    fun startGame(){
+    fun startGame() {
         startActivity(Intent(requireActivity(), TicTacToeStart::class.java))
     }
 

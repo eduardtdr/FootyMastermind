@@ -1,647 +1,676 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".GuessWhoStart"
-    android:background="@color/grey">
+    android:background="@color/grey"
+    tools:context=".GuessWhoStart">
 
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:tools="http://schemas.android.com/tools"
+        android:background="@color/grey"
         android:orientation="vertical"
-        tools:context=".GuessWhoStart"
-        android:background="@color/grey">
+        tools:context=".GuessWhoStart">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/guess_who"
-            android:textStyle="bold"
-            android:textSize="28sp"
-            android:layout_margin="0dp"
             android:layout_gravity="center"
-            android:padding="8dp"/>
+            android:layout_margin="0dp"
+            android:padding="8dp"
+            android:text="@string/guess_who"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/game_status_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/game_status_text"
-            android:text="@string/game_not_started"
-            android:textStyle="bold"
-            android:textSize="32sp"
+            android:layout_gravity="center"
             android:layout_margin="0dp"
             android:gravity="center"
-            android:layout_gravity="center"
             android:letterSpacing="0.04"
-            android:textColor="@color/green"/>
+            android:text="@string/game_not_started"
+            android:textColor="@color/green"
+            android:textSize="32sp"
+            android:textStyle="bold" />
 
         <Button
+            android:id="@+id/start_game_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="20dp"
-            android:text="Start game"
-            android:id="@+id/start_game_button"/>
+            android:text="Start game" />
 
         <Button
             android:id="@+id/exit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Exit"
             android:layout_marginTop="16dp"
+            android:text="Exit"
             android:visibility="gone" />
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <!-- GridLayout for images and names -->
-        <GridLayout
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:columnCount="3"
+                android:padding="16dp"
+                android:rowCount="5">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/image_1"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            tools:srcCompat="@tools:sample/avatars" />
+
+                        <Button
+                            android:id="@+id/button_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/baseline_do_not_disturb_24"
+                            android:visibility="invisible" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/name_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Name"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/image_2"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            tools:srcCompat="@tools:sample/avatars" />
+
+                        <Button
+                            android:id="@+id/button_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/baseline_do_not_disturb_24"
+                            android:visibility="invisible" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/name_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Name"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/image_3"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            tools:srcCompat="@tools:sample/avatars" />
+
+                        <Button
+                            android:id="@+id/button_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/baseline_do_not_disturb_24"
+                            android:visibility="invisible" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/name_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Name"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/image_4"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            tools:srcCompat="@tools:sample/avatars" />
+
+                        <Button
+                            android:id="@+id/button_4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/baseline_do_not_disturb_24"
+                            android:visibility="invisible" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/name_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Name"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/image_5"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            tools:srcCompat="@tools:sample/avatars" />
+
+                        <Button
+                            android:id="@+id/button_5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/baseline_do_not_disturb_24"
+                            android:visibility="invisible" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/name_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Name"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/image_6"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            tools:srcCompat="@tools:sample/avatars" />
+
+                        <Button
+                            android:id="@+id/button_6"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/baseline_do_not_disturb_24"
+                            android:visibility="invisible" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/name_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Name"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/image_7"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            tools:srcCompat="@tools:sample/avatars" />
+
+                        <Button
+                            android:id="@+id/button_7"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/baseline_do_not_disturb_24"
+                            android:visibility="invisible" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/name_7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Name"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/image_8"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            tools:srcCompat="@tools:sample/avatars" />
+
+                        <Button
+                            android:id="@+id/button_8"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/baseline_do_not_disturb_24"
+                            android:visibility="invisible" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/name_8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Name"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/image_9"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            tools:srcCompat="@tools:sample/avatars" />
+
+                        <Button
+                            android:id="@+id/button_9"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/baseline_do_not_disturb_24"
+                            android:visibility="invisible" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/name_9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Name"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/image_10"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            tools:srcCompat="@tools:sample/avatars" />
+
+                        <Button
+                            android:id="@+id/button_10"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/baseline_do_not_disturb_24"
+                            android:visibility="invisible" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/name_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Name"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/image_11"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            tools:srcCompat="@tools:sample/avatars" />
+
+                        <Button
+                            android:id="@+id/button_11"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/baseline_do_not_disturb_24"
+                            android:visibility="invisible" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/name_11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Name"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/image_12"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            tools:srcCompat="@tools:sample/avatars" />
+
+                        <Button
+                            android:id="@+id/button_12"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/baseline_do_not_disturb_24"
+                            android:visibility="invisible" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/name_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Name"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/image_13"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            tools:srcCompat="@tools:sample/avatars" />
+
+                        <Button
+                            android:id="@+id/button_13"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/baseline_do_not_disturb_24"
+                            android:visibility="invisible" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/name_13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Name"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/image_14"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            tools:srcCompat="@tools:sample/avatars" />
+
+                        <Button
+                            android:id="@+id/button_14"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/baseline_do_not_disturb_24"
+                            android:visibility="invisible" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/name_14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Name"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/image_15"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            tools:srcCompat="@tools:sample/avatars" />
+
+                        <Button
+                            android:id="@+id/button_15"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/baseline_do_not_disturb_24"
+                            android:visibility="invisible" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/name_15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Name"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+
+            </GridLayout>
+        </HorizontalScrollView>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:rowCount="5"
-            android:columnCount="3"
-            android:layout_marginLeft="20dp"
-            android:padding="16dp">
+            android:layout_margin="16dp"
+            android:orientation="horizontal">
 
-            <!-- Add items for 15 images and names -->
-            <!-- Repeat this structure for each grid item (Image and Text) -->
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/answer_input"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="8dp"
-                android:gravity="center">
-                <FrameLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center">
-                    <ImageView
-                        android:id="@+id/image_1"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        tools:srcCompat="@tools:sample/avatars"
-                        android:layout_gravity="center"/>
-
-                    <Button
-                        android:id="@+id/button_1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/baseline_do_not_disturb_24"
-                        android:visibility="invisible" />
-                </FrameLayout>
-
-                <TextView
-                    android:id="@+id/name_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name 1"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
-
-            <!-- Repeat similar blocks for other 14 images and names -->
-            <!-- For example, below is the next grid item -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="8dp"
-                android:gravity="center">
-
-                <FrameLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center">
-                    <ImageView
-                        android:id="@+id/image_2"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        tools:srcCompat="@tools:sample/avatars"
-                        android:layout_gravity="center"/>
-
-                    <Button
-                        android:id="@+id/button_2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/baseline_do_not_disturb_24"
-                        android:visibility="invisible" />
-                </FrameLayout>
-                <TextView
-                    android:id="@+id/name_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
+                android:layout_weight="1"
+                android:hint="Enter your answer or question"
+                android:padding="12dp"
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="8dp"
-                android:gravity="center">
+                android:layout_marginLeft="16dp"
+                android:gravity="center"
+                android:orientation="vertical">
 
-                <FrameLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center">
-                    <ImageView
-                        android:id="@+id/image_3"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        tools:srcCompat="@tools:sample/avatars"
-                        android:layout_gravity="center"/>
-
-                    <Button
-                        android:id="@+id/button_3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/baseline_do_not_disturb_24"
-                        android:visibility="invisible" />
-                </FrameLayout>
-                <TextView
-                    android:id="@+id/name_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="8dp"
-                android:gravity="center">
-
-                <FrameLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center">
-                    <ImageView
-                        android:id="@+id/image_4"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        tools:srcCompat="@tools:sample/avatars"
-                        android:layout_gravity="center"/>
-
-                    <Button
-                        android:id="@+id/button_4"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/baseline_do_not_disturb_24"
-                        android:visibility="invisible" />
-                </FrameLayout>
-                <TextView
-                    android:id="@+id/name_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="8dp"
-                android:gravity="center">
-
-                <FrameLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center">
-                    <ImageView
-                        android:id="@+id/image_5"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        tools:srcCompat="@tools:sample/avatars"
-                        android:layout_gravity="center"/>
-
-                    <Button
-                        android:id="@+id/button_5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/baseline_do_not_disturb_24"
-                        android:visibility="invisible" />
-                </FrameLayout>
-
-                <TextView
-                    android:id="@+id/name_5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="8dp"
-                android:gravity="center">
-
-                <FrameLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center">
-                    <ImageView
-                        android:id="@+id/image_6"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        tools:srcCompat="@tools:sample/avatars"
-                        android:layout_gravity="center"/>
-
-                    <Button
-                        android:id="@+id/button_6"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/baseline_do_not_disturb_24"
-                        android:visibility="invisible" />
-                </FrameLayout>
-                <TextView
-                    android:id="@+id/name_6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="8dp"
-                android:gravity="center">
-
-                <FrameLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center">
-                    <ImageView
-                        android:id="@+id/image_7"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        tools:srcCompat="@tools:sample/avatars"
-                        android:layout_gravity="center"/>
-
-                    <Button
-                        android:id="@+id/button_7"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/baseline_do_not_disturb_24"
-                        android:visibility="invisible" />
-                </FrameLayout>
-                <TextView
-                    android:id="@+id/name_7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="8dp"
-                android:gravity="center">
-
-                <FrameLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center">
-                    <ImageView
-                        android:id="@+id/image_8"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        tools:srcCompat="@tools:sample/avatars"
-                        android:layout_gravity="center"/>
-
-                    <Button
-                        android:id="@+id/button_8"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/baseline_do_not_disturb_24"
-                        android:visibility="invisible" />
-                </FrameLayout>
-                <TextView
-                    android:id="@+id/name_8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="8dp"
-                android:gravity="center">
-
-                <FrameLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center">
-                    <ImageView
-                        android:id="@+id/image_9"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        tools:srcCompat="@tools:sample/avatars"
-                        android:layout_gravity="center"/>
-
-                    <Button
-                        android:id="@+id/button_9"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/baseline_do_not_disturb_24"
-                        android:visibility="invisible" />
-                </FrameLayout>
-                <TextView
-                    android:id="@+id/name_9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="8dp"
-                android:gravity="center">
-
-                <FrameLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center">
-                    <ImageView
-                        android:id="@+id/image_10"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        tools:srcCompat="@tools:sample/avatars"
-                        android:layout_gravity="center"/>
-
-                    <Button
-                        android:id="@+id/button_10"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/baseline_do_not_disturb_24"
-                        android:visibility="invisible" />
-                </FrameLayout>
-
-                <TextView
-                    android:id="@+id/name_10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="8dp"
-                android:gravity="center">
-
-                <FrameLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center">
-                    <ImageView
-                        android:id="@+id/image_11"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        tools:srcCompat="@tools:sample/avatars"
-                        android:layout_gravity="center"/>
-
-                    <Button
-                        android:id="@+id/button_11"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/baseline_do_not_disturb_24"
-                        android:visibility="invisible" />
-                </FrameLayout>
-
-                <TextView
-                    android:id="@+id/name_11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="8dp"
-                android:gravity="center">
-
-                <FrameLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center">
-                    <ImageView
-                        android:id="@+id/image_12"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        tools:srcCompat="@tools:sample/avatars"
-                        android:layout_gravity="center"/>
-
-                    <Button
-                        android:id="@+id/button_12"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/baseline_do_not_disturb_24"
-                        android:visibility="invisible" />
-                </FrameLayout>
-
-                <TextView
-                    android:id="@+id/name_12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="8dp"
-                android:gravity="center">
-
-                <FrameLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center">
-                    <ImageView
-                        android:id="@+id/image_13"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        tools:srcCompat="@tools:sample/avatars"
-                        android:layout_gravity="center"/>
-
-                    <Button
-                        android:id="@+id/button_13"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/baseline_do_not_disturb_24"
-                        android:visibility="invisible" />
-                </FrameLayout>
-
-                <TextView
-                    android:id="@+id/name_13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="8dp"
-            android:gravity="center">
-
-            <FrameLayout
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center">
                 <ImageView
-                    android:id="@+id/image_14"
+                    android:id="@+id/targetImage"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    tools:srcCompat="@tools:sample/avatars"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    tools:srcCompat="@tools:sample/avatars" />
 
-                <Button
-                    android:id="@+id/button_14"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/baseline_do_not_disturb_24"
-                    android:visibility="invisible" />
-            </FrameLayout>
+                <TextView
+                    android:id="@+id/targetName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="Target Name"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/name_14"
+            <Button
+                android:id="@+id/submit_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
-                android:textSize="14sp"
-                android:gravity="center"
-                android:layout_marginTop="4dp"/>
+                android:layout_marginLeft="16dp"
+                android:text="Submit" />
         </LinearLayout>
-            <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="8dp"
-            android:gravity="center">
-
-                <FrameLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center">
-                    <ImageView
-                        android:id="@+id/image_15"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        tools:srcCompat="@tools:sample/avatars"
-                        android:layout_gravity="center"/>
-
-                    <Button
-                        android:id="@+id/button_15"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/baseline_do_not_disturb_24"
-                        android:visibility="invisible" />
-                </FrameLayout>
-
-            <TextView
-                android:id="@+id/name_15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name"
-                android:textSize="14sp"
-                android:gravity="center"
-                android:layout_marginTop="4dp"/>
-        </LinearLayout>
-            <!-- Continue adding similar blocks until you have 15 items in total -->
-
-        </GridLayout>
-    </HorizontalScrollView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="16dp">
-
-        <!-- EditText for answers/questions -->
-        <EditText
-            android:id="@+id/answer_input"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Enter your answer or question"
-            android:padding="12dp"
-            android:textSize="18sp"/>
-
-        <!-- Target image and name -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginLeft="16dp">
-
-            <ImageView
-                android:id="@+id/targetImage"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                tools:srcCompat="@tools:sample/avatars"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:id="@+id/targetName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Target Name"
-                android:textSize="14sp"
-                android:gravity="center"
-                android:layout_marginTop="4dp"/>
-        </LinearLayout>
-
-        <!-- Submit Button -->
-        <Button
-            android:id="@+id/submit_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Submit"
-            android:layout_marginLeft="16dp"/>
     </LinearLayout>
-    </LinearLayout>
-    </ScrollView>
+</ScrollView>

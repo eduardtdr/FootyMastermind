@@ -11,49 +11,50 @@
         android:id="@+id/gameImage"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:scaleType="fitCenter"
         android:layout_marginTop="100dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/baseline_local_fire_department_24"
         app:layout_constraintBottom_toTopOf="@+id/gameTitle"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/gameTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Title"
+        android:textColor="#388E3C"
         android:textSize="44sp"
         android:textStyle="bold"
-        android:textColor="#388E3C"
-        app:layout_constraintTop_toBottomOf="@+id/gameImage"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameImage" />
 
     <TextView
         android:id="@+id/gameCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Category"
-        android:textSize="30sp"
         android:textColor="#689F38"
-        app:layout_constraintTop_toBottomOf="@+id/gameTitle"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameTitle" />
 
     <TextView
         android:id="@+id/gameDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Description"
-        android:textSize="18sp"
-        android:textColor="#37474F"
-        app:layout_constraintTop_toBottomOf="@+id/gameCategory"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp"
+        android:gravity="center"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp"/>
+        android:paddingEnd="16dp"
+        android:text="Description"
+        android:textColor="#37474F"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameCategory" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

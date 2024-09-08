@@ -7,13 +7,13 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 object TicTacToeData {
-    private var _ticTacToeModel : MutableLiveData<TicTacToeModel> = MutableLiveData()
-    var ticTacToeModel : LiveData<TicTacToeModel> = _ticTacToeModel
+    private var _ticTacToeModel: MutableLiveData<TicTacToeModel> = MutableLiveData()
+    var ticTacToeModel: LiveData<TicTacToeModel> = _ticTacToeModel
     var myID = ""
 
-    fun saveTicTacToeModel(model : TicTacToeModel){
+    fun saveTicTacToeModel(model: TicTacToeModel) {
         _ticTacToeModel.postValue(model)
-        if(model.gameId != "-1") {
+        if (model.gameId != "-1") {
             Firebase.firestore.collection("tic_tac_toe_games").document(model.gameId).set(model)
         }
     }
@@ -24,7 +24,7 @@ object TicTacToeData {
             Firebase.firestore.collection("tic_tac_toe_games").document(currentModel.gameId)
                 .addSnapshotListener { value, error ->
                     if (error != null) {
-                        // Handle the error appropriately
+
                         Log.e("TicTacToeData", "Error fetching document", error)
                         return@addSnapshotListener
                     }
@@ -33,12 +33,12 @@ object TicTacToeData {
                     if (model != null) {
                         _ticTacToeModel.postValue(model!!)
                     } else {
-                        // Handle the case where the document doesn't exist
+
                         Log.w("TicTacToeData", "Document does not exist")
                     }
                 }
         } else {
-            // Handle the case where the model is null or gameId is invalid
+
             Log.w("TicTacToeData", "Invalid gameId or model is null")
         }
     }
