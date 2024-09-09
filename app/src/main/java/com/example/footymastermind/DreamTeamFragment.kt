@@ -202,11 +202,12 @@ class DreamTeamFragment : Fragment() {
                             selectedPlayerSnapshot.child("image").getValue(String::class.java)
                         val playerOverall =
                             selectedPlayerSnapshot.child("overall").getValue(Int::class.java) ?: 0
+                        val playerPosition = selectedPlayerSnapshot.child("position").getValue(String::class.java)
 
                         val lastName = selectedPlayerName.split(" ").last()
 
                         var pointsToAdd = playerOverall
-                        if (button.text == rowPosition) {
+                        if (playerPosition == rowPosition) {
                             pointsToAdd += 10
                         }
                         score += pointsToAdd
